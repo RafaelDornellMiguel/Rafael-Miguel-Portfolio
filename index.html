@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafael Miguel | Desenvolvedor de Software, ETL e Automação</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/filled/boxicons-filled.min.css" rel="stylesheet">
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/brands/boxicons-brands.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- metas para SEO e redes sociais -->
+    <meta name="description" content="Rafael Miguel é um desenvolvedor de software especializado    em automação, ETL e soluções orientadas a dados. Com experiência prática em Python, SQL e desenvolvimento de sistemas, Rafael cria soluções que eliminam processos manuais e aumentam a eficiência operacional. Conheça seus serviços e projetos inovadores.">
+    <meta name="keywords" content="Rafael Miguel, desenvolvedor de software, automação, ETL, engenharia de dados, Python, SQL, desenvolvimento de sistemas, soluções orientadas a dados">
+    <meta name="author" content="Rafael Miguel">
+    <meta name="description" content="Rafael Miguel é desenvolvedor especializado em ETL, automação de processos e engenharia de dados com Python, SQL e APIs. Soluções para empresas que querem eficiência e escala.">
+    <meta name="keywords" content="ETL, Python, SQL, automação, engenharia de dados, desenvolvedor backend, integração de sistemas">
+    <meta name="author" content="Rafael Miguel">
+    <link rel="canonical" href="https://rafaelmiguel.com">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Rafael Miguel | Data & Tech Solutions">
+    <meta property="og:description" content="Automação, ETL e engenharia de dados para empresas.">
+    <meta property="og:image" content="https://rafaelmiguel.com/img/preview.png">
+    <meta property="og:url" content="https://rafaelmiguel.com">
+    <meta property="og:type" content="website">
+    <meta name="google-site-verification" content="9jG3kMzCweh7AlvbocKg1gVTQPSkC7aFYRZkEsmCniU" />
+   
+    <link rel="icon" href="/favicon.ico"><link rel="icon" href="/favicon.ico">
+
+</head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+
+<!-- ======================== HEADER ======================== -->
+<header id="header">
+    <div class="logo-login" aria-label="Rafael Miguel">RM</div>
+
+    <nav class="hidden md:flex gap-8 items-center">
+        <a href="#about">Sobre</a>
+        <a href="#services">Serviços</a>
+        <a href="#work">Projetos</a>
+        <a href="#curriculo">Currículo</a>
+        <button class="btn-theme" onclick="toggleTheme()" aria-label="Alternar tema claro/escuro" title="Modo Claro/Escuro">
+            <i class="bx bx-sun" id="themeIcon"></i>
+        </button>
+        <a href="#contato" class="btn-nav-cta">Orçamento</a>
+    </nav>
+
+    <div class="md:hidden flex gap-3 items-center" style="z-index:201">
+        <button class="btn-theme" onclick="toggleTheme()" aria-label="Alternar tema">
+            <i class="bx bx-sun" id="themeIconMobile"></i>
+        </button>
+        <button class="btn-theme" onclick="toggleMobileMenu()" id="mobileMenuBtn" aria-label="Abrir menu" style="width:2.4rem;height:2.4rem;font-size:1.2rem">
+            <i class="bx bx-menu"></i>
+        </button>
+    </div>
+</header>
+
+<!-- ======================== MOBILE MENU ======================== -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu de navegação">
+    <a href="#about"    onclick="toggleMobileMenu()">Sobre</a>
+    <a href="#services" onclick="toggleMobileMenu()">Serviços</a>
+    <a href="#work"     onclick="toggleMobileMenu()">Projetos</a>
+    <a href="#curriculo" onclick="toggleMobileMenu()">Currículo</a>
+    <a href="#contato"  onclick="toggleMobileMenu()" class="btn-mobile-cta">Iniciar Projeto</a>
+</div>
+
+<!-- ======================== HERO ======================== -->
+<section id="hero-section">
+    <video id="hero-video" autoplay muted loop playsinline aria-hidden="true">
+        <source id="hero-video-src" src="img/gif.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1 class="hero-title" data-aos="fade-up">
+            DATA<br>DRIVEN<br>BUSINESS
+        </h1>
+        <p class="hero-sub" data-aos="fade-up" data-aos-delay="200">
+            Desenvolvedor focado em automação e dados. Crio sistemas que eliminam processos manuais, reduzem erros e aumentam eficiência operacional em empresas reais.
+        </p>
+    </div>
+</section>
+
+<!-- ======================== ABOUT ======================== -->
+<section id="about">
+    <div class="about-grid">
+        <div class="relative" data-aos="fade-right">
+            <div class="about-img-wrap" style="background-image:url('img/rafael-profile.jpg.png');background-size:cover;background-position:center;"></div>
+        </div>
+        <div data-aos="fade-left">
+            <p class="section-label">Background</p>
+            <h3 style="font-size:clamp(1.6rem,3.5vw,2.8rem);font-weight:800;line-height:1.15;margin-bottom:1.2rem;">
+               Desenvolvedor &amp;<br>Engenharia de Dados
+            </h3>
+            <p style="font-size:.9rem;line-height:1.8;color:var(--muted);margin-bottom:1.8rem;">
+Atuo no desenvolvimento de soluções orientadas a dados, com foco em <strong style="color:var(--text)">ETL, automação e integração de sistemas</strong>. 
+Na Clinicorp, fui responsável por projetos críticos de dados, incluindo atuação como <strong style="color:var(--text)">QA técnico</strong> e desenvolvimento de ferramentas internas que reduziram drasticamente o trabalho manual.
+
+Tenho experiência prática com <strong style="color:var(--text)">Python, SQL e JavaScript/TypeScript</strong>, criando APIs, pipelines e sistemas que conectam diferentes fontes de dados com eficiência e confiabilidade.
+</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
+                <div class="tech-pill">SQL Server</div>
+                <div class="tech-pill">Python Expert</div>
+                <div class="tech-pill">Power BI</div>
+                <div class="tech-pill">Flask / Pandas</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================== SERVICES ======================== -->
+<section id="services">
+    <h2>Soluções Corporativas</h2>
+    <div class="swiper mySwiper swiper-3d">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide swiper-slide-3d" style="background-image:url('img/service-01.png')"
+                 onclick="openServiceModal('ETL & Power BI','R$ 2.500 – R$ 8.000','15–30 dias','Construção de pipelines automatizados que coletam dados de diversas fontes (CSV, SQL, Firebird) e entregam dashboards em tempo real.')">
+                <span class="slide-num">01</span>
+                <h4 class="slide-title">ETL & BI</h4>
+                <p class="slide-desc">Inteligência de Dados e Dashboards.</p>
+                <button class="slide-btn" aria-label="Ver detalhes ETL & BI">Ver detalhes →</button>
+            </div>
+
+            <div class="swiper-slide swiper-slide-3d" style="background-image:url('img/service-02.png')"
+                 onclick="openServiceModal('Engenharia de Dados','Sob Consulta','Mensal/Projeto','Arquitetura de bancos de dados escaláveis, migração e manutenção de integridade.')">
+                <span class="slide-num">02</span>
+                <h4 class="slide-title">Eng. Dados</h4>
+                <p class="slide-desc">Estruturação de Bancos Relacionais.</p>
+                <button class="slide-btn" aria-label="Ver detalhes Eng. Dados">Ver detalhes →</button>
+            </div>
+
+            <div class="swiper-slide swiper-slide-3d" style="background-image:url('img/service-03.png')"
+                 onclick="openServiceModal('Dev Web Backend','R$ 3.000+','20–45 dias','Desenvolvimento de APIs e microsserviços para automação interna.')">
+                <span class="slide-num">03</span>
+                <h4 class="slide-title">Desenvolvimento de Sistemas</h4>
+                <p class="slide-desc">Automação de fluxos em Python/Flask.</p>
+                <button class="slide-btn" aria-label="Ver detalhes Dev Backend">Ver detalhes →</button>
+            </div>
+
+            <div class="swiper-slide swiper-slide-3d" style="background-image:url('img/service-04.png')"
+                 onclick="openServiceModal('Consultoria TI','R$ 350/h','Agendado','Diagnóstico técnico e planejamento estratégico de infraestrutura.')">
+                <span class="slide-num">04</span>
+                <h4 class="slide-title">Consultoria</h4>
+                <p class="slide-desc">Estratégia de eficiência tecnológica.</p>
+                <button class="slide-btn" aria-label="Ver detalhes Consultoria">Ver detalhes →</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================== WORK ======================== -->
+<section id="work">
+    <div style="max-width:72rem;margin:auto;padding:0 1rem">
+        <p class="section-label" style="margin-bottom:.5rem">Portfolio</p>
+        <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;margin-bottom:3rem;">Projetos</h2>
+        <div class="work-grid">
+            <a href="https://guia-elt.vercel.app/" class="work-card" style="background-image:url('img/project-01.png')" target="_blank" rel="noopener">
+                <span class="work-card-tag">Guia ETL</span>
+                <h4>Guia Prático de ETL</h4>
+                <p>Plataforma interativa com guias e ferramentas para aprender e dominar ETL. Desenvolvido com tecnologias modernas e deploy na Vercel.</p>
+                <i class="bx bx-up-arrow-alt work-card-arrow"></i>
+            </a>
+            <a href="https://www.stammerofficial.com/" class="work-card" style="background-image:url('img/project-02.png')" target="_blank" rel="noopener">
+                <span class="work-card-tag">Rock Band</span>
+                <h4>Stammers - Official</h4>
+                <p>Site oficial da banda Stammers. Design moderno com experiência imersiva para fãs. Vitrine completa da banda com integração de redes sociais.</p>
+                <i class="bx bx-up-arrow-alt work-card-arrow"></i>
+            </a>
+            <a href="https://data-toolkit.streamlit.app/" class="work-card" style="background-image:url('img/project-03.png')" target="_blank" rel="noopener">
+                <span class="work-card-tag">Data Tools</span>
+                <h4>Ferramentas de Tratamento de Dados</h4>
+                <p>Suite completa de ferramentas para limpeza, transformação e análise de dados. Interface intuitiva e pronta para uso em produção.</p>
+                <i class="bx bx-up-arrow-alt work-card-arrow"></i>
+            </a>
+            <a href="https://github.com/RafaelDornellMiguel/CRM-WhatsApp" class="work-card" style="background-image:url('img/project-04.png')" target="_blank" rel="noopener">
+                <span class="work-card-tag">CRM</span>
+                <h4>CRM WhatsApp</h4>
+                <p>Sistema de CRM integrado com WhatsApp. Automação de comunicação, gestão de leads e histórico de conversas em um único lugar.</p>
+                <i class="bx bx-up-arrow-alt work-card-arrow"></i>
+            </a>
+            <a href="https://www.notion.so/Arquiterura-Limpa-Development-21311cf0a24c815bac44e58ee434114b" class="work-card" style="background-image:url('img/project-05.png')" target="_blank" rel="noopener">
+                <span class="work-card-tag">Artigo</span>
+                <h4>Arquitetura Limpa</h4>
+                <p>Guia e resumo sobre Arquitetura Limpa em desenvolvimento. Conceitos fundamentais, padrões de design e boas práticas documentadas.</p>
+                <i class="bx bx-up-arrow-alt work-card-arrow"></i>
+            </a>
+            <div class="work-card work-card-stealth">
+                <div class="spinner"></div>
+                <h4 style="font-size:1rem;color:var(--muted);font-weight:700;margin-top:.5rem;">Em Andamento</h4>
+                <p style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;margin-top:.4rem;color:var(--muted)">Milestone do GitHub</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================== CURRICULO ======================== -->
+<section id="curriculo">
+    <div class="cv-box" data-aos="fade-up">
+        <div class="cv-header">
+            <div>
+                <h2>Currículo Profissional</h2>
+                <p class="cv-label" style="margin-top:.4rem">Rafael Dornell Miguel</p>
+            </div>
+            <a href="seu-curriculo.pdf" download class="btn-download">
+                <i class="bx bxs-download"></i> Baixar PDF
+            </a>
+        </div>
+
+        <div style="display:grid;gap:2.5rem" class="md:grid-cols-3">
+            <div>
+                <p style="font-size:.6rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem">Redes Profissionais</p>
+                <div style="display:flex;flex-direction:column;gap:1rem">
+                    <a href="https://www.linkedin.com/in/rafael-dornell-miguel/" target="_blank" rel="noopener" class="social-link">
+                        <i class="bx bxl-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/RafaelDornellMiguel" target="_blank" rel="noopener" class="social-link">
+                        <i class="bx bxl-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+            <div style="grid-column:span 2 / span 2">
+                <p style="font-size:.6rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem">Experiência Recente</p>
+                <div class="cv-timeline">
+                    <div class="cv-timeline-item">
+                        <div class="cv-timeline-dot"></div>
+                        <h5>Desenvolvedor & Analista de Dados (ETL)</h5>
+                        <p class="company">Clinicorp Solution</p>
+                        <p>Atuação no desenvolvimento de pipelines de dados e automação de processos utilizando Python e SQL. 
+Responsável por projetos críticos de validação de dados, incluindo atuação como QA técnico, garantindo integridade e consistência em migrações complexas entre múltiplos bancos (PostgreSQL, SQL Server, Firebird).
+
+Desenvolvimento de ferramentas internas e microsserviços que reduziram significativamente o esforço operacional e aumentaram a eficiência da equipe.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================== CONTACT ======================== -->
+<section id="contato">
+    <div class="contact-wrapper" data-aos="fade-up">
+        <h2 class="contact-title">Iniciar Projeto</h2>
+        <p class="contact-sub">Descreva seu problema e receba uma solução técnica sob medida.</p>
+
+        <form id="contactForm" novalidate>
+            <!-- Service selector -->
+            <div class="field-group">
+                <label>Qual serviço você precisa?</label>
+                <div class="service-pills" role="radiogroup" aria-label="Tipo de serviço">
+                    <label class="pill-label">
+                        <input type="radio" name="servico" value="etl" checked>
+                        <i class="bx bx-bar-chart-alt-2"></i> ETL & BI
+                    </label>
+                    <label class="pill-label">
+                        <input type="radio" name="servico" value="dados">
+                        <i class="bx bx-data"></i> Eng. Dados
+                    </label>
+                    <label class="pill-label">
+                        <input type="radio" name="servico" value="backend">
+                        <i class="bx bx-code-alt"></i> Backend
+                    </label>
+                    <label class="pill-label">
+                        <input type="radio" name="servico" value="consultoria">
+                        <i class="bx bx-bulb"></i> Consultoria
+                    </label>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="field-group">
+                <label for="desc">Descreva o desafio</label>
+                <textarea id="desc" name="desc" rows="4"
+                    placeholder="Explique brevemente o problema ou o processo que precisa ser otimizado…"
+                    aria-label="Descrição do projeto"></textarea>
+            </div>
+
+            <!-- Name + phone -->
+            <div class="field-row">
+                <div class="field-group" style="margin-bottom:0">
+                    <label for="nome">Nome / Empresa</label>
+                    <input type="text" id="nome" name="nome" placeholder="Ex: João Silva" autocomplete="name">
+                </div>
+                <div class="field-group" style="margin-bottom:0">
+                    <label for="whats">WhatsApp</label>
+                    <input type="tel" id="whats" name="whats" placeholder="(47) 9 0000-0000" autocomplete="tel">
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn-submit" style="margin-top:1.8rem">
+                <i class="bx bxl-whatsapp" style="font-size:1.2rem"></i>
+                Enviar solicitação
+            </button>
+        </form>
+    </div>
+</section>
+
+<!-- ======================== SERVICE MODAL ======================== -->
+<div id="serviceModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal('serviceModal')" aria-label="Fechar modal">
+            <i class="bx bx-x"></i>
+        </button>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <div class="modal-meta">
+            <div class="modal-meta-box">
+                <span>Investimento</span>
+                <b id="modalPrice"></b>
+            </div>
+            <div class="modal-meta-box">
+                <span>Tempo Médio</span>
+                <b id="modalTime"></b>
+            </div>
+        </div>
+        <p class="modal-desc" id="modalDesc"></p>
+        <a href="#contato" class="btn-modal-cta" onclick="closeModal('serviceModal')">Fazer Orçamento</a>
+    </div>
+</div>
+
+<!-- ======================== SCRIPTS ======================== -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script src="javascript.js"></script>
+
+<!-- ======================== FOOTER ======================== -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-social">
+            <a href="https://github.com/RafaelDornellMiguel" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+                <i class="bxl bx-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/rafael-dornell-miguel/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+                <i class="bxl bx-linkedin"></i>
+            </a>
+            <a href="https://www.instagram.com/rafael_dornell_miguel/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+                <i class="bxl bx-instagram"></i>
+            </a>
+            <a href="https://wa.me/5547996825170" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+                <i class="bxl bx-whatsapp"></i>
+            </a>
+            <a href="mailto:rafaelldornemigueel@gmail.com" aria-label="Email" title="Email">
+                <i class="bx bx-envelope"></i>
+            </a>
+        </div>
+        <p class="footer-text">© 2026 Rafael Miguel · <strong>Data & Tech Solutions</strong></p>
+    </div>
+</footer>
+
+</body>
+</html>
