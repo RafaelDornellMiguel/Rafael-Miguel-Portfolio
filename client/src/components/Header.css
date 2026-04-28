@@ -1,0 +1,207 @@
+/* Header Styles */
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 200;
+  padding: 1.5rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background var(--transition), padding var(--transition), box-shadow var(--transition), transform var(--transition);
+  top: 0;
+  left: 0;
+}
+
+.header.scrolled {
+  background: rgba(3, 3, 3, 0.92);
+  backdrop-filter: blur(20px);
+  padding: 0.9rem 5%;
+  box-shadow: 0 4px 40px rgba(0, 171, 240, 0.08);
+}
+
+.dark .header.scrolled {
+  background: rgba(240, 244, 248, 0.94);
+}
+
+.header.hidden-nav {
+  transform: translateY(-100%);
+}
+
+.logo-login {
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: -2px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--text) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  cursor: default;
+  user-select: none;
+  transition: letter-spacing var(--transition);
+}
+
+.logo-login:hover {
+  letter-spacing: 1px;
+}
+
+/* Desktop Navigation */
+.nav-desktop {
+  display: none;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .nav-desktop {
+    display: flex;
+  }
+}
+
+.nav-desktop a {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  transition: color var(--transition);
+  position: relative;
+}
+
+.nav-desktop a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width var(--transition);
+}
+
+.nav-desktop a:hover {
+  color: var(--accent);
+}
+
+.nav-desktop a:hover::after {
+  width: 100%;
+}
+
+/* Theme Button */
+.btn-theme {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text);
+  border-radius: 50%;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all var(--transition);
+}
+
+.btn-theme:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-theme i {
+  font-size: 1.1rem;
+}
+
+/* CTA Button */
+.btn-nav-cta {
+  padding: 0.7rem 1.4rem;
+  border: 1px solid var(--accent);
+  color: var(--text);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: all var(--transition);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: transparent;
+}
+
+.btn-nav-cta:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Mobile Navigation */
+.nav-mobile {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  z-index: 201;
+}
+
+@media (min-width: 768px) {
+  .nav-mobile {
+    display: none;
+  }
+}
+
+.btn-menu {
+  width: 2.4rem;
+  height: 2.4rem;
+  font-size: 1.2rem;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  z-index: 199;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition), visibility var(--transition);
+}
+
+.mobile-menu.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu a {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.mobile-menu a:hover {
+  color: var(--accent);
+}
+
+.btn-mobile-cta {
+  padding: 1rem 2rem;
+  border: 1px solid var(--accent);
+  color: var(--text);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: all var(--transition);
+  font-size: 1rem;
+  font-weight: 700;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn-mobile-cta:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
