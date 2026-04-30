@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "sobre": "Sobre",
+    "servicos": "Serviços",
+    "projetos": "Projetos",
+    "curriculo": "Currículo",
+    "contato": "Contato",
+    "blog": "Blog"
+  },
+  "hero": {
+    "name": "Rafael Dornell Miguel",
+    "title1": "Desenvolvedor",
+    "title2": "Engenheiro de Dados",
+    "description": "Desenvolvedor focado em automação e dados. Crio sistemas que eliminam processos manuais, reduzem erros e aumentam eficiência operacional em empresas reais. Especialista em ETL, engenharia de dados e desenvolvimento com Python, SQL e Power BI."
+  },
+  "about": {
+    "label": "BACKGROUND",
+    "name": "Rafael Dornell Miguel",
+    "role1": "Desenvolvedor",
+    "role2": "Engenharia de Dados",
+    "description": "Atuo no desenvolvimento de soluções orientadas a dados, com foco em ETL, automação e integração de sistemas. Na Clinicorp Solution, fui responsável por projetos críticos de dados, incluindo atuação como QA técnico e desenvolvimento de ferramentas internas que reduziram drasticamente o trabalho manual.",
+    "experience": "Tenho experiência prática com Python, SQL e JavaScript/TypeScript, criando APIs, pipelines e sistemas que conectam diferentes fontes de dados com eficiência e confiabilidade. Minha especialidade é transformar dados em insights acionáveis através de ETL, Power BI e automação de processos."
+  },
+  "services": {
+    "title": "Serviços",
+    "etl": "ETL & BI",
+    "etlDesc": "Pipelines de dados robustos, transformação de dados e dashboards interativos com Power BI",
+    "dados": "Engenharia de Dados",
+    "dadosDesc": "Arquitetura de dados escalável, data warehousing e otimização de bancos de dados",
+    "backend": "Backend",
+    "backendDesc": "APIs REST, microsserviços e sistemas backend com Python, Node.js e SQL",
+    "consultoria": "Consultoria",
+    "consultoriaDesc": "Estratégia de dados, otimização de processos e transformação digital"
+  },
+  "projects": {
+    "title": "Projetos",
+    "viewMore": "Ver Mais"
+  },
+  "curriculum": {
+    "title": "Experiência Profissional",
+    "download": "Baixar Currículo"
+  },
+  "contact": {
+    "title": "Iniciar Projeto",
+    "subtitle": "Descreva seu problema e receba uma solução técnica sob medida em ETL, engenharia de dados ou desenvolvimento.",
+    "service": "Qual serviço você precisa?",
+    "description": "Descreva o desafio",
+    "descriptionPlaceholder": "Explique brevemente o problema ou o processo que precisa ser otimizado…",
+    "name": "Nome / Empresa",
+    "namePlaceholder": "Ex: João Silva",
+    "phone": "WhatsApp",
+    "phonePlaceholder": "(47) 9 0000-0000",
+    "submit": "Enviar solicitação",
+    "submitting": "Enviando...",
+    "success": "Mensagem enviada com sucesso!",
+    "successMessage": "Obrigado por entrar em contato. Você será redirecionado para o WhatsApp em breve.",
+    "redirecting": "Redirecionando para WhatsApp..."
+  },
+  "news": {
+    "label": "NOTÍCIAS",
+    "title": "Artigos em Tempo Real",
+    "subtitle": "Acompanhe as últimas tendências em dados, desenvolvimento e tecnologia",
+    "technology": "Tecnologia",
+    "data": "Dados",
+    "python": "Python",
+    "sql": "SQL",
+    "etl": "ETL",
+    "loading": "Carregando notícias...",
+    "empty": "Nenhuma notícia encontrada",
+    "readMore": "Ler Artigo",
+    "source": "Artigos fornecidos por",
+    "updated": "Atualizado em tempo real"
+  },
+  "blog": {
+    "title": "Blog de Tecnologia",
+    "subtitle": "Artigos, tutoriais e insights sobre ETL, engenharia de dados e desenvolvimento",
+    "search": "Buscar artigos...",
+    "categories": "Categorias",
+    "totalArticles": "Artigos",
+    "noArticles": "Nenhum artigo encontrado",
+    "previous": "Anterior",
+    "next": "Próximo"
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados",
+    "followMe": "Siga-me"
+  }
+}

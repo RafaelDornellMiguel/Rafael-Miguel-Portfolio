@@ -1,33 +1,57 @@
+import "dotenv/config";
+import cors from "cors";
 import express from "express";
-import { createServer } from "http";
-import path from "path";
-import { fileURLToPath } from "url";
+import { createExpressMiddleware } from "@trpc/server/adapters/express";
+import { appRouter } from "./routers.js";
+import { createContext } from "./_core/context.js";
+import { ENV } from "./_core/env.js";
+import { registerOAuthRoutes } from "./_core/oauth.js";
+import { registerStorageProxy } from "./_core/storageProxy.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const app = express();
+const port = Number(process.env.PORT) || 8080;
 
-async function startServer() {
-  const app = express();
-  const server = createServer(app);
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN ?? "http://localhost:8086",
+    credentials: true,
+  }),
+);
+app.use(express.json({ limit: "2mb" }));
 
-  // Serve static files from dist/public in production
-  const staticPath =
-    process.env.NODE_ENV === "production"
-      ? path.resolve(__dirname, "public")
-      : path.resolve(__dirname, "..", "dist", "public");
+registerStorageProxy(app);
+registerOAuthRoutes(app);
 
-  app.use(express.static(staticPath));
+app.use(
+  "/api/trpc",
+  createExpressMiddleware({
+    router: appRouter,
+    createContext,
+  }),
+);
 
-  // Handle client-side routing - serve index.html for all routes
-  app.get("*", (_req, res) => {
-    res.sendFile(path.join(staticPath, "index.html"));
+app.get("/api/health", (_req, res) => {
+  res.json({
+    status: "ok",
+    message: `Backend em http://localhost:${port}`,
   });
+});
 
-  const port = process.env.PORT || 3000;
-
-  server.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}/`);
-  });
-}
-
-startServer().catch(console.error);
+app.listen(port, () => {
+  const storageMode =
+    ENV.supabaseUrl && ENV.supabaseStorageBucket
+      ? ENV.supabaseStoragePublic
+        ? "Supabase (bucket público)"
+        : ENV.supabaseServiceRoleKey
+          ? "Supabase (URLs assinadas)"
+          : "Supabase incompleto (falta SERVICE_ROLE ou PUBLIC)"
+      : ENV.forgeApiUrl
+        ? "Forge"
+        : "desativado — configure Supabase ou Forge";
+  console.log(
+    `\x1b[32m[Backend]\x1b[0m http://localhost:${port}  |  tRPC /api/trpc  |  assets /assets-cloud  |  storage: ${storageMode}`,
+  );
+  console.log(
+    `  CORS: ${process.env.CORS_ORIGIN ?? "http://localhost:8086"}  |  blog: dev.to via news.getLatest`,
+  );
+});

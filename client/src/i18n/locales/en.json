@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "sobre": "About",
+    "servicos": "Services",
+    "projetos": "Projects",
+    "curriculo": "Resume",
+    "contato": "Contact",
+    "blog": "Blog"
+  },
+  "hero": {
+    "name": "Rafael Dornell Miguel",
+    "title1": "Developer",
+    "title2": "Data Engineer",
+    "description": "Developer focused on automation and data. I create systems that eliminate manual processes, reduce errors and increase operational efficiency in real companies. Specialist in ETL, data engineering and development with Python, SQL and Power BI."
+  },
+  "about": {
+    "label": "BACKGROUND",
+    "name": "Rafael Dornell Miguel",
+    "role1": "Developer",
+    "role2": "Data Engineering",
+    "description": "I work on developing data-driven solutions, focusing on ETL, automation and system integration. At Clinicorp Solution, I was responsible for critical data projects, including acting as a technical QA and developing internal tools that drastically reduced manual work.",
+    "experience": "I have practical experience with Python, SQL and JavaScript/TypeScript, creating APIs, pipelines and systems that connect different data sources with efficiency and reliability. My specialty is transforming data into actionable insights through ETL, Power BI and process automation."
+  },
+  "services": {
+    "title": "Services",
+    "etl": "ETL & BI",
+    "etlDesc": "Robust data pipelines, data transformation and interactive dashboards with Power BI",
+    "dados": "Data Engineering",
+    "dadosDesc": "Scalable data architecture, data warehousing and database optimization",
+    "backend": "Backend",
+    "backendDesc": "REST APIs, microservices and backend systems with Python, Node.js and SQL",
+    "consultoria": "Consulting",
+    "consultoriaDesc": "Data strategy, process optimization and digital transformation"
+  },
+  "projects": {
+    "title": "Projects",
+    "viewMore": "View More"
+  },
+  "curriculum": {
+    "title": "Professional Experience",
+    "download": "Download Resume"
+  },
+  "contact": {
+    "title": "Start a Project",
+    "subtitle": "Describe your problem and receive a custom technical solution in ETL, data engineering or development.",
+    "service": "What service do you need?",
+    "description": "Describe the challenge",
+    "descriptionPlaceholder": "Briefly explain the problem or process that needs to be optimized…",
+    "name": "Name / Company",
+    "namePlaceholder": "Ex: John Smith",
+    "phone": "WhatsApp",
+    "phonePlaceholder": "+55 (47) 9 0000-0000",
+    "submit": "Send request",
+    "submitting": "Sending...",
+    "success": "Message sent successfully!",
+    "successMessage": "Thank you for reaching out. You will be redirected to WhatsApp shortly.",
+    "redirecting": "Redirecting to WhatsApp..."
+  },
+  "news": {
+    "label": "NEWS",
+    "title": "Real-Time Articles",
+    "subtitle": "Follow the latest trends in data, development and technology",
+    "technology": "Technology",
+    "data": "Data",
+    "python": "Python",
+    "sql": "SQL",
+    "etl": "ETL",
+    "loading": "Loading articles...",
+    "empty": "No articles found",
+    "readMore": "Read Article",
+    "source": "Articles provided by",
+    "updated": "Updated in real-time"
+  },
+  "blog": {
+    "title": "Technology Blog",
+    "subtitle": "Articles, tutorials and insights about ETL, data engineering and development",
+    "search": "Search articles...",
+    "categories": "Categories",
+    "totalArticles": "Articles",
+    "noArticles": "No articles found",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "followMe": "Follow Me"
+  }
+}

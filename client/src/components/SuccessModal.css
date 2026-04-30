@@ -1,0 +1,228 @@
+.success-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.success-modal-overlay.visible {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+  backdrop-filter: blur(4px);
+}
+
+.success-modal {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 420px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transform: scale(0.9) translateY(20px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: center;
+}
+
+.success-modal.visible {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* Success Icon */
+.success-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: successPulse 0.6s ease-out;
+}
+
+.success-icon svg {
+  width: 40px;
+  height: 40px;
+  color: white;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: successCheckmark 0.6s ease-out;
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes successCheckmark {
+  0% {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+/* Title */
+.success-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 0 0 12px 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Message */
+.success-message {
+  font-size: 14px;
+  color: var(--muted-foreground);
+  margin: 0 0 24px 0;
+  line-height: 1.6;
+}
+
+/* Info Section */
+.success-info {
+  background: var(--muted);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.info-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--foreground);
+  margin: 0;
+  font-weight: 500;
+}
+
+.info-text i {
+  font-size: 20px;
+  color: #25d366;
+  animation: whatsappBounce 1s ease-in-out infinite;
+}
+
+@keyframes whatsappBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Close Button */
+.success-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--muted);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--foreground);
+  transition: all 0.2s ease;
+  font-size: 20px;
+}
+
+.success-close:hover {
+  background: var(--muted-foreground);
+  color: var(--background);
+  transform: rotate(90deg);
+}
+
+/* Progress Bar */
+.success-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+  border-radius: 0 0 16px 0;
+  animation: progressBar 5s linear;
+}
+
+@keyframes progressBar {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] .success-modal {
+  background: #1a1a1a;
+  border-color: #333;
+}
+
+:root[data-theme="light"] .success-modal {
+  background: #ffffff;
+  border-color: #e5e7eb;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .success-modal {
+    padding: 32px 24px;
+    max-width: 100%;
+    margin: 16px;
+  }
+
+  .success-title {
+    font-size: 20px;
+  }
+
+  .success-message {
+    font-size: 13px;
+  }
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .success-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+}

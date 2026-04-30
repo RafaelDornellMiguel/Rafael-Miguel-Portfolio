@@ -29,6 +29,8 @@
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--border-color);
+  object-fit: cover;
+  display: block;
 }
 
 .section-label {

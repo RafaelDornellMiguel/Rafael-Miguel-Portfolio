@@ -1,0 +1,68 @@
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--foreground);
+  transition: all 0.2s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.language-switcher:hover {
+  background: var(--accent);
+  color: var(--accent-foreground);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.language-switcher:active {
+  transform: translateY(0);
+}
+
+.lang-flag {
+  font-size: 16px;
+  display: inline-block;
+}
+
+.lang-code {
+  letter-spacing: 0.5px;
+}
+
+/* Dark mode */
+:root[data-theme="dark"] .language-switcher {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+:root[data-theme="dark"] .language-switcher:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Light mode */
+:root[data-theme="light"] .language-switcher {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme="light"] .language-switcher:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .language-switcher {
+    padding: 6px 10px;
+    font-size: 12px;
+    gap: 4px;
+  }
+
+  .lang-flag {
+    font-size: 14px;
+  }
+}

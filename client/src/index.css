@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "aos/dist/aos.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -95,23 +96,23 @@
   --bg: #f0f4f8;
   --surface: #ffffff;
   --surface2: #f8fafc;
-  --text: #0f172a;
-  --muted: #64748b;
+  --text: #030303;
+  --muted: #475569;
   --border-color: rgba(0, 130, 190, 0.22);
 
   --background: #f0f4f8;
-  --foreground: #0f172a;
+  --foreground: #030303;
   --card: #ffffff;
-  --card-foreground: #0f172a;
+  --card-foreground: #030303;
   --popover: #ffffff;
-  --popover-foreground: #0f172a;
+  --popover-foreground: #030303;
   --secondary: #f8fafc;
-  --secondary-foreground: #0f172a;
+  --secondary-foreground: #030303;
   --muted: #64748b;
-  --muted-foreground: #475569;
+  --muted-foreground: #374151;
   --accent-color: #00abf0;
-  --accent-foreground: #0f172a;
-  --destructive: #ef4444;
+  --accent-foreground: #030303;
+  --destructive: #dc2626;
   --destructive-foreground: #ffffff;
   --border: rgba(0, 130, 190, 0.22);
   --input: rgba(0, 130, 190, 0.22);
@@ -177,6 +178,85 @@
       padding-left: 2rem; /* 32px - desktop padding */
       padding-right: 2rem;
       max-width: 1280px; /* Standard content width */
+    }
+  }
+
+  /* App Global Styles (fonts/icons in index.html) */
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .main-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-dark);
+  }
+
+  /* Selection */
+  ::selection {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  ::-moz-selection {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }

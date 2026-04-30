@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from '@/hooks/useTranslation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -25,7 +26,7 @@ const SERVICES: Service[] = [
     number: '01',
     title: 'ETL & BI',
     subtitle: 'Inteligência de Dados e Dashboards.',
-    image: '/img/service-01.png',
+    image: '/public/img/service-ETL.png',
     modalTitle: 'ETL & Power BI',
     price: 'R$ 2.500 – R$ 8.000',
     time: '15–30 dias',
@@ -36,7 +37,7 @@ const SERVICES: Service[] = [
     number: '02',
     title: 'Eng. Dados',
     subtitle: 'Estruturação de Bancos Relacionais.',
-    image: '/img/service-02.png',
+    image: '/public/img/service-analise.png',
     modalTitle: 'Engenharia de Dados',
     price: 'Sob Consulta',
     time: 'Mensal/Projeto',
@@ -47,7 +48,7 @@ const SERVICES: Service[] = [
     number: '03',
     title: 'Desenvolvimento de Sistemas',
     subtitle: 'Automação de fluxos em Python/Flask.',
-    image: '/img/service-03.png',
+    image: '/public/img/service-Power.png',
     modalTitle: 'Dev Web Backend',
     price: 'R$ 3.000+',
     time: '20–45 dias',
@@ -58,7 +59,7 @@ const SERVICES: Service[] = [
     number: '04',
     title: 'Consultoria',
     subtitle: 'Estratégia de eficiência tecnológica.',
-    image: '/img/service-04.png',
+    image: '/public/img/service-consultoria.png',
     modalTitle: 'Consultoria TI',
     price: 'R$ 350/h',
     time: 'Agendado',
@@ -67,6 +68,7 @@ const SERVICES: Service[] = [
 ];
 
 export default function Services() {
+  const { t } = useTranslation();
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -88,7 +90,7 @@ export default function Services() {
 
   return (
     <section id="services" className="services-section">
-      <h2>Soluções Corporativas de Dados e Desenvolvimento</h2>
+      <h2>{t('services.title') || 'Soluções Corporativas de Dados e Desenvolvimento'}</h2>
       
       <Swiper
         effect={'coverflow'}
@@ -118,6 +120,13 @@ export default function Services() {
               className="service-card"
               style={{ backgroundImage: `url('${service.image}')` }}
               onClick={() => handleServiceClick(service)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  handleServiceClick(service);
+                }
+              }}
             >
               <span className="slide-num">{service.number}</span>
               <h3 className="slide-title">{service.title}</h3>
@@ -126,7 +135,7 @@ export default function Services() {
                 className="slide-btn"
                 aria-label={`Ver detalhes ${service.title}`}
               >
-                Ver detalhes →
+                {t('services.details') || 'Ver detalhes'} →
               </button>
             </div>
           </SwiperSlide>
