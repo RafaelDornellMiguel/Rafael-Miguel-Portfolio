@@ -1,21 +1,18 @@
 {
   "name": "portifolio",
   "version": "1.0.0",
-  "description": "Esta versão foi reestruturada seguindo os padrões de mercado, separando o **Frontend** do **Backend** para maior performance e organização.",
+  "description": "Portfólio reestruturado - Frontend & Backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently -n client,server -c cyan,magenta \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
     "dev:client": "npm run dev --prefix client",
-    "dev:server": "npm run dev --prefix server"
+    "dev:server": "npm run dev --prefix server",
+    "build": "npm run build --prefix client"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
     "dotenv-cli": "^11.0.0"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "clsx": "^2.1.1",
     "lucide-react": "^1.14.0",
