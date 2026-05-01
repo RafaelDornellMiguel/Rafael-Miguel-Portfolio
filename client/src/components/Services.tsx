@@ -104,7 +104,7 @@ export default function Services() {
           {SERVICES.map((service, index) => (
             <div
               key={service.id}
-              className="service-card"
+              className="service-card group/card"
               style={{
                 backgroundImage: `url(${service.image})`,
                 backgroundSize: 'cover',
