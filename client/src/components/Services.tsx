@@ -1,11 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
 import ServiceModal from './ServiceModal';
+import { ArrowRight } from 'lucide-react';
 import './Services.css';
 
 interface Service {
@@ -88,68 +84,59 @@ export default function Services() {
     setShowModal(true);
   };
 
+  const handleContactClick = () => {
+    setShowModal(false);
+    const contactSection = document.getElementById('contato');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="services" className="services-section">
-      <h2>{t('services.title') || 'Soluções Corporativas de Dados e Desenvolvimento'}</h2>
-      
-      <Swiper
-        effect={'coverflow'}
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={'auto'}
-        coverflowEffect={{
-          rotate: 45,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true,
-        }}
-        loop={true}
-        autoplay={{
-          delay: 20000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        }}
-        speed={700}
-        modules={[EffectCoverflow, Autoplay]}
-        className="services-swiper"
-      >
-        {SERVICES.map((service) => (
-          <SwiperSlide key={service.id} className="service-slide">
+      <div className="services-container">
+        <div className="services-header">
+          <h2 data-aos="fade-down">{t('services.title') || 'Soluções Corporativas'}</h2>
+          <p className="services-subtitle" data-aos="fade-up">Serviços especializados em dados e desenvolvimento</p>
+        </div>
+
+        <div className="services-grid">
+          {SERVICES.map((service, index) => (
             <div
+              key={service.id}
               className="service-card"
-              style={{ backgroundImage: `url('${service.image}')` }}
-              onClick={() => handleServiceClick(service)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  handleServiceClick(service);
-                }
+              style={{
+                backgroundImage: `url(${service.image})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
               }}
+              data-aos="fade-up"
+              data-aos-delay={`${index * 100}`}
             >
-              <span className="slide-num">{service.number}</span>
-              <h3 className="slide-title">{service.title}</h3>
-              <p className="slide-desc">{service.subtitle}</p>
-              <button 
-                className="slide-btn"
-                aria-label={`Ver detalhes ${service.title}`}
-              >
-                {t('services.details') || 'Ver detalhes'} →
-              </button>
+              <div className="service-overlay" />
+              <div className="service-content">
+                <div className="service-number">{service.number}</div>
+                <h3 className="service-title">{service.title}</h3>
+                <p className="service-desc">{service.subtitle}</p>
+                <button
+                  className="service-btn"
+                  onClick={() => handleServiceClick(service)}
+                  aria-label={`Saiba mais sobre ${service.title}`}
+                >
+                  Saiba mais
+                  <ArrowRight size={18} />
+                </button>
+              </div>
             </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          ))}
+        </div>
+      </div>
 
       {showModal && selectedService && (
         <ServiceModal
           service={selectedService}
           onClose={() => setShowModal(false)}
-          onContactClick={() => {
-            setShowModal(false);
-            document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
-          }}
+          onContactClick={handleContactClick}
         />
       )}
     </section>

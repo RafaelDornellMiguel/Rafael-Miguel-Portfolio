@@ -3,6 +3,7 @@ import { useLocation, Link } from 'wouter';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from '@/hooks/useTranslation';
 import LanguageSwitcher from './LanguageSwitcher';
+import { Sun, Moon, Menu, X } from 'lucide-react';
 import './Header.css';
 
 export default function Header() {
@@ -10,102 +11,136 @@ export default function Header() {
   const { theme, toggleTheme } = useTheme();
   const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [lastY, setLastY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const y = window.scrollY;
-      setIsScrolled(y > 80);
-      setIsHidden(y > lastY && y > 200);
-      setLastY(y);
+      setIsScrolled(window.scrollY > 0);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastY]);
+  }, []);
 
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
     
     if (location !== '/') {
       navigate('/');
-      // Aguarda a navegação e tenta rolar após um pequeno delay
       setTimeout(() => {
         const element = document.getElementById(id);
         if (element) element.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     } else {
       const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  const handleBlogClick = () => {
-    setMobileMenuOpen(false);
-    navigate('/blog');
-  };
+  const navItems = [
+    { label: t('nav.sobre'), id: 'about' },
+    { label: t('nav.servicos'), id: 'services' },
+    { label: t('nav.projetos'), id: 'work' },
+    { label: t('nav.curriculo'), id: 'curriculo' },
+    { label: t('nav.blog') || 'Blog', id: 'blog' },
+  ];
 
   return (
-    <header className={`header ${isScrolled ? 'scrolled' : ''} ${isHidden ? 'hidden-nav' : ''}`}>
-      <Link href="/">
-        <div className="logo-login" style={{ cursor: 'pointer' }}>RM</div>
-      </Link>
+    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="header-container">
+        {/* Logo */}
+        <Link href="/">
+          <div className="logo" tabIndex={0} role="button">
+            <span className="logo-text">RM</span>
+          </div>
+        </Link>
 
-      {/* Desktop Navigation */}
-      <nav className="nav-desktop">
-        <a href="/#about" onClick={(e) => { e.preventDefault(); scrollToSection('about'); }}>{t('nav.sobre')}</a>
-        <a href="/#services" onClick={(e) => { e.preventDefault(); scrollToSection('services'); }}>{t('nav.servicos')}</a>
-        <a href="/#work" onClick={(e) => { e.preventDefault(); scrollToSection('work'); }}>{t('nav.projetos')}</a>
-        <a href="/#curriculo" onClick={(e) => { e.preventDefault(); scrollToSection('curriculo'); }}>{t('nav.curriculo')}</a>
-        <button onClick={handleBlogClick} className={`nav-link ${location === '/blog' ? 'active' : ''}`} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', font: 'inherit', padding: 0 }}>{t('nav.blog') || 'Blog'}</button>
-        <LanguageSwitcher />
-        <button 
-          className="btn-theme" 
-          onClick={toggleTheme}
-          aria-label="Alternar tema claro/escuro"
-          title="Modo Claro/Escuro"
-        >
-          <i className={`bx ${theme === 'light' ? 'bx-moon' : 'bx-sun'}`}></i>
-        </button>
-        <a href="/#contato" className="btn-nav-cta" onClick={(e) => { e.preventDefault(); scrollToSection('contato'); }}>
-          {t('contact.submit')}
-        </a>
-      </nav>
+        {/* Desktop Navigation */}
+        <nav className="nav-desktop" aria-label="Navigation principal">
+          {navItems.slice(0, 4).map((item) => (
+            <a
+              key={item.id}
+              href={`/#${item.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection(item.id);
+              }}
+              className="nav-link"
+            >
+              {item.label}
+            </a>
+          ))}
+          <a href="/#blog" onClick={(e) => {
+            e.preventDefault();
+            navigate('/blog');
+          }} className="nav-link">
+            {t('nav.blog') || 'Blog'}
+          </a>
+        </nav>
 
-      {/* Mobile Navigation */}
-      <div className="nav-mobile">
-        <button 
-          className="btn-theme" 
-          onClick={toggleTheme}
-          aria-label="Alternar tema"
-        >
-          <i className={`bx ${theme === 'light' ? 'bx-moon' : 'bx-sun'}`}></i>
-        </button>
-        <button 
-          className="btn-theme btn-menu"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Abrir menu"
-        >
-          <i className={`bx ${mobileMenuOpen ? 'bx-x' : 'bx-menu'}`}></i>
-        </button>
+        {/* Right controls */}
+        <div className="header-controls">
+          <LanguageSwitcher />
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={theme === 'light' ? 'Ativar modo escuro' : 'Ativar modo claro'}
+            title={theme === 'light' ? 'Dark mode' : 'Light mode'}
+          >
+            {theme === 'light' ? (
+              <Moon size={20} />
+            ) : (
+              <Sun size={20} />
+            )}
+          </button>
+          <a href="/#contato" className="btn-contact" onClick={(e) => {
+            e.preventDefault();
+            scrollToSection('contato');
+          }}>
+            {t('contact.submit')}
+          </a>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="btn-menu"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Abrir menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="mobile-menu active" role="dialog" aria-modal="true" aria-label="Menu de navegação">
-          <a href="/#about" onClick={(e) => { e.preventDefault(); scrollToSection('about'); }}>{t('nav.sobre')}</a>
-          <a href="/#services" onClick={(e) => { e.preventDefault(); scrollToSection('services'); }}>{t('nav.servicos')}</a>
-          <a href="/#work" onClick={(e) => { e.preventDefault(); scrollToSection('work'); }}>{t('nav.projetos')}</a>
-          <a href="/#curriculo" onClick={(e) => { e.preventDefault(); scrollToSection('curriculo'); }}>{t('nav.curriculo')}</a>
-          <button onClick={handleBlogClick} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', font: 'inherit', width: '100%', textAlign: 'left', padding: '12px 0' }}>{t('nav.blog') || 'Blog'}</button>
-          <a href="/#contato" className="btn-mobile-cta" onClick={(e) => { e.preventDefault(); scrollToSection('contato'); }}>
-            {t('contact.submit')}
-          </a>
-        </div>
+        <nav className="mobile-menu" role="navigation" aria-label="Menu de navegação mobile">
+          <div className="mobile-menu-content">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`/#${item.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (item.id === 'blog') {
+                    navigate('/blog');
+                  } else {
+                    scrollToSection(item.id);
+                  }
+                }}
+                className="mobile-nav-link"
+              >
+                {item.label}
+              </a>
+            ))}
+            <a href="/#contato" className="mobile-nav-cta" onClick={(e) => {
+              e.preventDefault();
+              scrollToSection('contato');
+            }}>
+              {t('contact.submit')}
+            </a>
+          </div>
+        </nav>
       )}
     </header>
   );

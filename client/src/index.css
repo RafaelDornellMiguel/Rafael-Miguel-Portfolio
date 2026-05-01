@@ -44,79 +44,95 @@
 }
 
 :root {
-  /* Rafael Miguel Portfolio - Design Tokens */
-  --accent: #00abf0;
-  --accent-dark: #0081b8;
-  --bg: #030303;
-  --surface: #0e0e0e;
-  --surface2: #151515;
-  --text: #ffffff;
-  --muted: #6b7280;
-  --border-color: rgba(0, 171, 240, 0.18);
-  --radius: 1.2rem;
-  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* Tailwind semantic colors mapped to Rafael's design */
-  --primary: #00abf0;
-  --primary-foreground: #030303;
-  --sidebar-primary: #00abf0;
-  --sidebar-primary-foreground: #030303;
-  --chart-1: #00abf0;
-  --chart-2: #0081b8;
-  --chart-3: #00abf0;
-  --chart-4: #0081b8;
-  --chart-5: #00abf0;
-  --background: #030303;
-  --foreground: #ffffff;
-  --card: #0e0e0e;
-  --card-foreground: #ffffff;
-  --popover: #0e0e0e;
-  --popover-foreground: #ffffff;
-  --secondary: #151515;
-  --secondary-foreground: #ffffff;
-  --muted: #6b7280;
-  --muted-foreground: #9ca3af;
-  --accent-color: #00abf0;
-  --accent-foreground: #030303;
-  --destructive: #ef4444;
+  /* Design System - Dark Mode (Default) */
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #21262d;
+  --text: #c9d1d9;
+  --text-strong: #f0f6fc;
+  --text-muted: #8b949e;
+  --border-color: #30363d;
+  --border-color-subtle: rgba(48, 54, 61, 0.5);
+  
+  /* Primary accent - Azul */
+  --primary: #0284c7;
+  --primary-light: #0ea5e9;
+  --primary-dark: #0369a1;
+  
+  /* Semantic colors */
+  --success: #16a34a;
+  --warning: #d97706;
+  --error: #dc2626;
+  
+  /* Tailwind semantic mapping */
+  --primary-foreground: #f0f6fc;
+  --secondary: #21262d;
+  --secondary-foreground: #c9d1d9;
+  --muted: #6e7681;
+  --muted-foreground: #8b949e;
+  --accent-color: #0284c7;
+  --accent-foreground: #f0f6fc;
+  --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: rgba(0, 171, 240, 0.18);
-  --input: rgba(0, 171, 240, 0.18);
-  --ring: #00abf0;
-  --sidebar: #030303;
-  --sidebar-foreground: #ffffff;
-  --sidebar-accent: #00abf0;
-  --sidebar-accent-foreground: #030303;
-  --sidebar-border: rgba(0, 171, 240, 0.18);
-  --sidebar-ring: #00abf0;
+  --background: #0d1117;
+  --foreground: #c9d1d9;
+  --card: #161b22;
+  --card-foreground: #c9d1d9;
+  --popover: #161b22;
+  --popover-foreground: #c9d1d9;
+  --border: #30363d;
+  --input: #21262d;
+  --ring: #0284c7;
+  --sidebar: #0d1117;
+  --sidebar-foreground: #c9d1d9;
+  --sidebar-accent: #0284c7;
+  --sidebar-accent-foreground: #f0f6fc;
+  --sidebar-border: #30363d;
+  --sidebar-ring: #0284c7;
+  --chart-1: #0284c7;
+  --chart-2: #0369a1;
+  --chart-3: #16a34a;
+  --chart-4: #d97706;
+  --chart-5: #dc2626;
+  
+  /* Animation & Spacing */
+  --radius: 0.5rem;
+  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dark {
   /* Light mode colors */
-  --bg: #f0f4f8;
-  --surface: #ffffff;
-  --surface2: #f8fafc;
-  --text: #030303;
-  --muted: #475569;
-  --border-color: rgba(0, 130, 190, 0.22);
+  --bg: #ffffff;
+  --surface: #f6f8fa;
+  --surface2: #eaeef2;
+  --text: #0d1117;
+  --text-strong: #0d1117;
+  --text-muted: #6e7681;
+  --border-color: #d0d7de;
+  --border-color-subtle: rgba(208, 215, 222, 0.5);
+  
+  /* Primary accent - Azul */
+  --primary: #0284c7;
+  --primary-light: #0ea5e9;
+  --primary-dark: #0369a1;
 
-  --background: #f0f4f8;
-  --foreground: #030303;
-  --card: #ffffff;
-  --card-foreground: #030303;
+  --background: #ffffff;
+  --foreground: #0d1117;
+  --card: #f6f8fa;
+  --card-foreground: #0d1117;
   --popover: #ffffff;
-  --popover-foreground: #030303;
-  --secondary: #f8fafc;
-  --secondary-foreground: #030303;
-  --muted: #64748b;
-  --muted-foreground: #374151;
-  --accent-color: #00abf0;
-  --accent-foreground: #030303;
+  --popover-foreground: #0d1117;
+  --secondary: #eaeef2;
+  --secondary-foreground: #0d1117;
+  --muted: #6e7681;
+  --muted-foreground: #57606a;
+  --accent-color: #0284c7;
+  --accent-foreground: #f0f6fc;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: rgba(0, 130, 190, 0.22);
-  --input: rgba(0, 130, 190, 0.22);
-  --ring: #00abf0;
+  --border: #d0d7de;
+  --input: #eaeef2;
+  --ring: #0284c7;
 }
 
 @layer base {
@@ -142,22 +158,12 @@
 @layer components {
   /**
    * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
    */
   .container {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
+    padding-left: 1rem;
     padding-right: 1rem;
   }
 
@@ -168,26 +174,76 @@
 
   @media (min-width: 640px) {
     .container {
-      padding-left: 1.5rem; /* 24px - tablet padding */
+      padding-left: 1.5rem;
       padding-right: 1.5rem;
     }
   }
 
   @media (min-width: 1024px) {
     .container {
-      padding-left: 2rem; /* 32px - desktop padding */
+      padding-left: 2rem;
       padding-right: 2rem;
-      max-width: 1280px; /* Standard content width */
+      max-width: 1280px;
     }
   }
 
-  /* App Global Styles (fonts/icons in index.html) */
+  /* Button Focus Ring - Accessibility */
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  a:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 rounded;
+  }
+
+  /* Link base styling */
+  a {
+    @apply text-primary hover:text-primary-dark transition-colors duration-200;
+  }
+
+  /* Heading hierarchy */
+  h1 {
+    @apply text-4xl font-bold leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl font-bold leading-tight;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold leading-snug;
+  }
+
+  h4 {
+    @apply text-xl font-semibold leading-snug;
+  }
+
+  h5 {
+    @apply text-lg font-semibold;
+  }
+
+  h6 {
+    @apply text-base font-semibold;
+  }
+
+  /* Code styling */
+  code {
+    @apply bg-surface/50 px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+
+  pre {
+    @apply bg-surface px-4 py-3 rounded-lg overflow-x-auto;
+  }
+
+  pre code {
+    @apply bg-transparent px-0 py-0;
+  }
+}
 
   body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    @apply bg-background text-foreground;
   }
 
   html {
@@ -202,30 +258,31 @@
   /* Scrollbar Styling */
   ::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--bg);
+    background: var(--surface);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--accent);
+    background: var(--primary);
     border-radius: 5px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-dark);
+    background: var(--primary-dark);
   }
 
   /* Selection */
   ::selection {
-    background: var(--accent);
-    color: var(--bg);
+    background: var(--primary);
+    color: var(--primary-foreground);
   }
 
   ::-moz-selection {
-    background: var(--accent);
-    color: var(--bg);
+    background: var(--primary);
+    color: var(--primary-foreground);
   }
 
   /* Animations */
@@ -241,7 +298,7 @@
   @keyframes slideUp {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
@@ -252,11 +309,31 @@
   @keyframes slideDown {
     from {
       opacity: 0;
-      transform: translateY(-30px);
+      transform: translateY(-20px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
-}
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-in {
+    animation: slideUp 0.3s ease-out;
+  }
+  .animate-out {
+    animation: slideDown 0.3s ease-in;
+  }
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }

@@ -35,9 +35,9 @@ export const appRouter = router({
           await createContact(input);
           return { success: true, message: "Mensagem enviada com sucesso!" };
         } catch (error) {
-          console.error("Erro ao criar contato:", error);
-          throw new Error("Erro ao enviar mensagem");
-        }
+  console.error("🔥 ERRO REAL:", error);
+  throw error; // NÃO mascara
+}
       }),
     list: publicProcedure.query(async () => {
       try {

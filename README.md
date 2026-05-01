@@ -1,55 +1,78 @@
-# Rafael Portfolio - Versão Otimizada (V3)
+# Rafael Portfolio - Nova Identidade Visual (V3)
 
-Esta versão foi reestruturada seguindo os padrões de mercado, separando o **Frontend** do **Backend** para maior performance e organização.
+Este projeto é o portfólio profissional de **Rafael Dornell Miguel**, focado em Engenharia de Dados e Desenvolvimento de Sistemas. A versão atual conta com uma identidade visual moderna inspirada no GitHub e curso.dev.
 
-## 🚀 Arquitetura
-- **Frontend**: React + Vite + Tailwind (Porta `8086`)
-- **Backend**: Node.js + Express + Drizzle ORM (Porta `8080`)
-- **Banco de Dados**: PostgreSQL (Supabase)
-- **Storage**: Supabase Storage (Proxy de imagens configurado)
+## 🚀 Tecnologias Utilizadas
+
+- **Frontend**: React, Vite, Tailwind CSS v4, Wouter, AOS (Animate on Scroll).
+- **Backend**: Node.js, Express, tRPC, Drizzle ORM.
+- **Banco de Dados**: PostgreSQL (Supabase).
+- **Acessibilidade**: Foco em semântica HTML5 e suporte a leitores de tela.
 
 ---
 
 ## 🛠️ Como Rodar o Projeto
 
-Você precisará de **dois terminais** abertos simultaneamente.
+O projeto é dividido em `client` (Frontend) e `server` (Backend).
 
-### 1. Configuração do Backend
-Abra o primeiro terminal na pasta `server`:
-```bash
-cd server
-pnpm install
-pnpm run dev
-```
-> O backend estará rodando em: `http://localhost:8080`
+### 1. Pré-requisitos
+Certifique-se de ter o **Node.js** e o **pnpm** (ou npm/yarn) instalados.
 
-### 2. Configuração do Frontend
-Abra o segundo terminal na pasta `client`:
-```bash
-cd client
-pnpm install
-pnpm run dev
-```
-> O frontend estará rodando em: `http://localhost:8086`
+### 2. Configuração do Backend
+1. Entre na pasta `server`:
+   ```bash
+   cd server
+   ```
+2. Instale as dependências:
+   ```bash
+   pnpm install
+   ```
+3. Configure o arquivo `.env` com suas credenciais do Supabase (use o `.env.example` como base).
+4. Inicie o servidor:
+   ```bash
+   pnpm run dev
+   ```
+   *O backend rodará em `http://localhost:8080`*
+
+### 3. Configuração do Frontend
+1. Em um novo terminal, entre na pasta `client`:
+   ```bash
+   cd client
+   ```
+2. Instale as dependências:
+   ```bash
+   pnpm install
+   ```
+3. Inicie o projeto:
+   ```bash
+   pnpm run dev
+   ```
+   *O frontend rodará em `http://localhost:8086`*
+
+---
+
+## ✨ Melhorias da Nova Versão
+
+1. **Repaginação Visual**: Nova paleta de cores, tipografia Poppins e layout inspirado em plataformas de tecnologia.
+2. **Acessibilidade (Auditada)**:
+   - Uso de `fieldset` e `legend` em formulários.
+   - Melhora na navegação via teclado (Focus rings).
+   - Atributos `aria-*` em modais e componentes interativos.
+3. **Responsividade**:
+   - Layout fluido para mobile, tablet e desktop.
+   - Menu mobile otimizado.
+4. **Performance**:
+   - Pre-carregamento de assets críticos.
+   - Separação clara entre lógica de negócio (Backend) e interface (Frontend).
 
 ---
 
 ## 📁 Estrutura de Pastas
-- `/client`: Todo o código da interface (React).
-- `/server`: Toda a lógica de servidor, banco de dados e proxy de imagens.
-- `/shared`: Tipagens e constantes compartilhadas entre os dois.
 
-## 🔒 Variáveis de Ambiente (.env)
-Certifique-se de que o arquivo `server/.env` contém suas chaves do Supabase:
-- `DATABASE_URL`
-- `SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `SUPABASE_BUCKET_NAME`
+- `/client`: Interface React e componentes UI.
+- `/server`: API tRPC, Banco de Dados e lógica de servidor.
+- `/shared`: Constantes e tipos compartilhados.
 
 ---
 
-## ✨ Melhorias Realizadas
-1. **Desacoplamento**: Front e Back agora são independentes.
-2. **Proxy de Imagens**: O frontend pede imagens para o backend na porta 8080, que busca no Supabase.
-3. **Performance**: O Vite agora roda de forma limpa sem o peso do servidor Node no mesmo processo.
-4. **Limpeza**: Removido qualquer rastro de ferramentas de IA na estrutura de pastas.
+Desenvolvido por **Rafael Dornell Miguel**.

@@ -84,25 +84,26 @@ export default function Contact() {
   };
 
   return (
-    <section id="contato" className="contact-section">
+    <section id="contato" className="contact-section" aria-labelledby="contact-title">
       <div className="contact-wrapper" data-aos="fade-up">
-        <h2 className="contact-title">Iniciar Projeto com Rafael Dornell Miguel</h2>
+        <h2 id="contact-title" className="contact-title">Iniciar Projeto com Rafael Dornell Miguel</h2>
         <p className="contact-sub">
           Descreva seu problema e receba uma solução técnica sob medida em ETL, engenharia de dados ou
           desenvolvimento.
         </p>
 
         <form onSubmit={handleSubmit} className="contact-form" noValidate>
-          <div className="field-group">
-            <label>Qual serviço você precisa?</label>
-            <div className="service-pills" role="radiogroup" aria-label="Tipo de serviço">
+          <fieldset className="field-group">
+            <legend className="sr-only">Qual serviço você precisa?</legend>
+            <p className="field-label" aria-hidden="true">Qual serviço você precisa?</p>
+            <div className="service-pills" role="radiogroup">
               {[
                 { value: 'etl', label: 'ETL & BI', icon: 'bx-bar-chart-alt-2' },
                 { value: 'dados', label: 'Eng. Dados', icon: 'bx-data' },
                 { value: 'backend', label: 'Backend', icon: 'bx-code-alt' },
                 { value: 'consultoria', label: 'Consultoria', icon: 'bx-bulb' },
               ].map((service) => (
-                <label key={service.value} className="pill-label">
+                <label key={service.value} className={`pill-label ${formData.servico === service.value ? 'checked' : ''}`}>
                   <input
                     type="radio"
                     name="servico"
@@ -110,12 +111,13 @@ export default function Contact() {
                     checked={formData.servico === service.value}
                     onChange={(e) => handleServiceChange(e.target.value)}
                     disabled={isSubmitting}
+                    className="sr-only"
                   />
-                  <i className={`bx ${service.icon}`}></i> {service.label}
+                  <i className={`bx ${service.icon}`} aria-hidden="true"></i> <span>{service.label}</span>
                 </label>
               ))}
             </div>
-          </div>
+          </fieldset>
 
           <div className="field-group">
             <label htmlFor="desc">Descreva o desafio</label>
@@ -126,7 +128,8 @@ export default function Contact() {
               placeholder="Explique brevemente o problema ou o processo que precisa ser otimizado…"
               value={formData.desc}
               onChange={handleInputChange}
-              aria-label="Descrição do projeto"
+              required
+              aria-required="true"
               disabled={isSubmitting}
             />
           </div>
@@ -142,6 +145,8 @@ export default function Contact() {
                 value={formData.nome}
                 onChange={handleInputChange}
                 autoComplete="name"
+                required
+                aria-required="true"
                 disabled={isSubmitting}
               />
             </div>
@@ -155,6 +160,8 @@ export default function Contact() {
                 value={formData.whats}
                 onChange={handleInputChange}
                 autoComplete="tel"
+                required
+                aria-required="true"
                 disabled={isSubmitting}
               />
             </div>
@@ -163,11 +170,10 @@ export default function Contact() {
           <button
             type="submit"
             className="btn-submit"
-            aria-label="Enviar solicitação de orçamento"
             disabled={isSubmitting}
           >
-            <i className="bx bxl-whatsapp"></i>
-            {isSubmitting ? 'Enviando...' : 'Enviar solicitação'}
+            <i className={`bx ${isSubmitting ? 'bx-loader-alt bx-spin' : 'bxl-whatsapp'}`} aria-hidden="true"></i>
+            <span>{isSubmitting ? 'Enviando...' : 'Enviar solicitação'}</span>
           </button>
         </form>
       </div>
