@@ -1,4 +1,4 @@
-// api/serverless.ts
+// api/[...path].ts
 import dotenv from 'dotenv';
 dotenv.config();
 
