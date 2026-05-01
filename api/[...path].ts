@@ -5,4 +5,8 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).json({ ping: 'ok' });
   }
   res.status(404).json({ error: 'Not found' });
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes
