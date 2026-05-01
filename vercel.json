@@ -1,7 +1,5 @@
-{  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/serverless"
-    }
+{
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/serverless" }
   ]
 }
