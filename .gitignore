@@ -111,3 +111,6 @@ temp/
 
 # App version file (auto-generated, not part of source)
 client/public/__app__/version.json
+
+.vercel
+.env*.local
