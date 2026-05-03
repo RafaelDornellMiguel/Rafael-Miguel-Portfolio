@@ -46,8 +46,9 @@ queryClient.getQueryCache().subscribe((event) => {
 const trpcClient = trpc.createClient({
   links: [
     httpBatchLink({
-      url: "/api/trpc",
-       // <--- Isso aqui tem que bater com o backend
+      url: import.meta.env.VITE_SUPABASE_URL 
+        ? `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/trpc`
+        : "/api/trpc",
     }),
   ],
 });

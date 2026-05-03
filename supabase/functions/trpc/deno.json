@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "@trpc/server": "npm:@trpc/server@10.45.2",
+    "std/": "https://deno.land/std@0.168.0/"
+  }
+}
