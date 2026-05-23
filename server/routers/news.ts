@@ -1,5 +1,7 @@
-import { publicProcedure, router } from "../_core/trpc";
 import { z } from "zod";
+import axios from "axios";
+
+import { publicProcedure, router } from "../_core/trpc.js";
 
 const DEVTO_API = "https://dev.to/api/articles";
 
@@ -19,91 +21,96 @@ type DevToArticle = {
   reading_time_minutes?: number;
 };
 
-function mapArticle(article: DevToArticle) {
-  const u = article.user;
+type MappedArticle = {
+  id: number;
+  title: string;
+  description: string;
+  url: string;
+  image: string | null;
+  author: string;
+  authorUsername: string;
+  authorImage: string;
+  publishedAt: string;
+  tags: string[];
+  readingTime: number;
+};
+
+function mapArticle(article: DevToArticle): MappedArticle {
   return {
     id: article.id,
     title: article.title,
     description: article.description ?? "",
     url: article.url,
-    image: article.cover_image,
-    author: u?.name ?? "Autor",
-    authorUsername: u?.username ?? "",
-    authorImage: u?.profile_image ?? "",
-    // Retornamos como String ISO para evitar erros de serialização do superjson
-    publishedAt: new Date(article.published_at).toISOString(),
-    tags: (article.tag_list ?? []).slice(0, 3),
+    image: article.cover_image ?? null,
+    author: article.user?.name ?? "Autor",
+    authorUsername: article.user?.username ?? "",
+    authorImage: article.user?.profile_image ?? "",
+    publishedAt: article.published_at,
+    tags: Array.isArray(article.tag_list) ? article.tag_list.slice(0, 3) : [],
     readingTime: article.reading_time_minutes ?? 1,
   };
 }
 
 async function fetchDevToArticles(tag: string, limit: number): Promise<DevToArticle[]> {
+  const safeLimit = Math.min(Math.max(limit, 1), 50);
+
   const params = new URLSearchParams({
-    per_page: Math.min(Math.max(limit, 1), 50).toString(),
+    per_page: safeLimit.toString(),
     state: "published",
-    sort_by: "latest",
   });
-  if (tag.trim()) {
+
+  if (tag?.trim()) {
     params.set("tag", tag.trim());
   }
 
-  const response = await fetch(`${DEVTO_API}?${params}`, {
-    headers: {
-      Accept: "application/json",
-      "User-Agent": "Rafael-Portfolio/1.0 (portfolio; +https://github.com)",
-    },
-  });
+  const url = `${DEVTO_API}?${params.toString()}`;
+  console.log("[NEWS_API] Fetching:", url);
 
-  if (!response.ok) {
-    const text = await response.text().catch(() => "");
-    console.warn(`[News] dev.to HTTP ${response.status}: ${text.slice(0, 200)}`);
-    throw new Error(`Erro ao buscar artigos: ${response.status}`);
+  try {
+    const response = await axios.get<DevToArticle[]>(url, {
+      timeout: 10000,
+      headers: {
+        Accept: "application/json",
+        "User-Agent": "rafael-portfolio",
+      },
+    });
+
+    if (!Array.isArray(response.data)) {
+      throw new Error("DEV.to retornou formato inválido");
+    }
+
+    return response.data;
+  } catch (err) {
+    console.error("[NEWS_API_ERROR]", err);
+    return [];
   }
-
-  const json: unknown = await response.json();
-  if (!Array.isArray(json)) {
-    console.warn("[News] dev.to resposta inesperada (não é array)");
-    throw new Error("Resposta inesperada da API");
-  }
-
-  return json as DevToArticle[];
 }
 
 export const newsRouter = router({
   getLatest: publicProcedure
     .input(
       z.object({
-        tag: z.string().min(1).max(64).optional(),
-        limit: z.coerce.number().min(1).max(50).optional(), // Use coerce aqui
+        tag: z.string().optional(),
+        limit: z.coerce.number().optional(),
       }),
     )
     .query(async ({ input }) => {
       const tag = input.tag?.trim() || "technology";
       const limit = input.limit ?? 6;
-      try {
-        const articles = await fetchDevToArticles(tag, limit);
-        return articles.map(mapArticle);
-      } catch (e) {
-        console.error("[News] getLatest:", e);
-        throw new Error("Não foi possível buscar os artigos mais recentes.");
-      }
+      const articles = await fetchDevToArticles(tag, limit);
+      return articles.map(mapArticle);
     }),
 
   searchByTag: publicProcedure
     .input(
       z.object({
         tag: z.string().min(1).max(64),
-        limit: z.number().min(1).max(50).optional(),
+        limit: z.coerce.number().optional(),
       }),
     )
     .query(async ({ input }) => {
       const limit = input.limit ?? 6;
-      try {
-        const articles = await fetchDevToArticles(input.tag, limit);
-        return articles.map(mapArticle);
-      } catch (e) {
-        console.error("[News] searchByTag:", e);
-        throw new Error("Não foi possível buscar artigos para a tag especificada.");
-      }
+      const articles = await fetchDevToArticles(input.tag, limit);
+      return articles.map(mapArticle);
     }),
 });

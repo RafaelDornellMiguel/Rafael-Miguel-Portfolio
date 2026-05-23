@@ -114,3 +114,13 @@ client/public/__app__/version.json
 
 .vercel
 .env*.local
+
+# Vite temp files
+client/vite.config.ts.timestamp-*
+
+# Cursor IDE index
+.git/cursor/
+
+# pnpm (project uses npm)
+pnpm-lock.yaml
+.pnpm-store/

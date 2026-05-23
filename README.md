@@ -1,78 +1,99 @@
-# Rafael Portfolio - Nova Identidade Visual (V3)
+# Rafael Dornell Miguel — Portfólio
 
-Este projeto é o portfólio profissional de **Rafael Dornell Miguel**, focado em Engenharia de Dados e Desenvolvimento de Sistemas. A versão atual conta com uma identidade visual moderna inspirada no GitHub e curso.dev.
+Portfólio pessoal de **Rafael Dornell Miguel**, desenvolvedor de software e engenheiro de dados especializado em ETL, pipelines de dados e automação.
 
-## 🚀 Tecnologias Utilizadas
-
-- **Frontend**: React, Vite, Tailwind CSS v4, Wouter, AOS (Animate on Scroll).
-- **Backend**: Node.js, Express, tRPC, Drizzle ORM.
-- **Banco de Dados**: PostgreSQL (Supabase).
-- **Acessibilidade**: Foco em semântica HTML5 e suporte a leitores de tela.
+🔗 **Live:** [rafael-miguel-portfolio.vercel.app](https://rafael-miguel-portfolio.vercel.app)
 
 ---
 
-## 🛠️ Como Rodar o Projeto
+## Stack
 
-O projeto é dividido em `client` (Frontend) e `server` (Backend).
-
-### 1. Pré-requisitos
-Certifique-se de ter o **Node.js** e o **pnpm** (ou npm/yarn) instalados.
-
-### 2. Configuração do Backend
-1. Entre na pasta `server`:
-   ```bash
-   cd server
-   ```
-2. Instale as dependências:
-   ```bash
-   pnpm install
-   ```
-3. Configure o arquivo `.env` com suas credenciais do Supabase (use o `.env.example` como base).
-4. Inicie o servidor:
-   ```bash
-   pnpm run dev
-   ```
-   *O backend rodará em `http://localhost:8080`*
-
-### 3. Configuração do Frontend
-1. Em um novo terminal, entre na pasta `client`:
-   ```bash
-   cd client
-   ```
-2. Instale as dependências:
-   ```bash
-   pnpm install
-   ```
-3. Inicie o projeto:
-   ```bash
-   pnpm run dev
-   ```
-   *O frontend rodará em `http://localhost:8086`*
+| Camada   | Tecnologia                                          |
+|----------|-----------------------------------------------------|
+| Frontend | React 18, Vite 5, Tailwind CSS, Wouter              |
+| API      | tRPC v10, Express, Zod                              |
+| Banco    | PostgreSQL (Supabase) + Drizzle ORM                 |
+| Deploy   | Vercel (SPA estático + Serverless Function)         |
+| Blog     | DEV.to API (artigos em tempo real)                  |
 
 ---
 
-## ✨ Melhorias da Nova Versão
+## Estrutura
 
-1. **Repaginação Visual**: Nova paleta de cores, tipografia Poppins e layout inspirado em plataformas de tecnologia.
-2. **Acessibilidade (Auditada)**:
-   - Uso de `fieldset` e `legend` em formulários.
-   - Melhora na navegação via teclado (Focus rings).
-   - Atributos `aria-*` em modais e componentes interativos.
-3. **Responsividade**:
-   - Layout fluido para mobile, tablet e desktop.
-   - Menu mobile otimizado.
-4. **Performance**:
-   - Pre-carregamento de assets críticos.
-   - Separação clara entre lógica de negócio (Backend) e interface (Frontend).
+```
+portfolio/
+├── api/
+│   └── [...path].ts        # Serverless function Vercel (entrada da API)
+├── client/
+│   ├── public/             # Assets estáticos (imagens, vídeos)
+│   └── src/
+│       ├── components/     # Header, Hero, About, Services, Projects, News, Contact, Footer
+│       ├── pages/          # Blog
+│       ├── hooks/
+│       ├── i18n/           # Localização PT-BR / EN
+│       └── lib/trpc.ts     # Cliente tRPC tipado
+├── server/
+│   ├── _core/              # tRPC setup, contexto, auth, env
+│   ├── drizzle/            # Schema e migrations
+│   ├── routers/            # news.ts (DEV.to)
+│   ├── routers.ts          # AppRouter agregado
+│   ├── db.ts               # Conexão PostgreSQL (lazy)
+│   └── index.ts            # Dev server local
+├── shared/                 # Constantes compartilhadas (frontend + backend)
+└── vercel.json             # Configuração de build e rewrites
+```
 
 ---
 
-## 📁 Estrutura de Pastas
+## Desenvolvimento local
 
-- `/client`: Interface React e componentes UI.
-- `/server`: API tRPC, Banco de Dados e lógica de servidor.
-- `/shared`: Constantes e tipos compartilhados.
+**Pré-requisitos:** Node.js 20, npm
+
+```bash
+# 1. Instalar dependências
+npm install
+npm install --prefix client
+npm install --prefix server
+
+# 2. Configurar variáveis de ambiente do backend
+cp server/.env.example server/.env
+# Preencher: DATABASE_URL, JWT_SECRET
+
+# 3. Rodar frontend + backend em paralelo
+npm run dev
+# Frontend: http://localhost:8086
+# Backend:  http://localhost:8080
+```
 
 ---
 
-Desenvolvido por **Rafael Dornell Miguel**.
+## Deploy (Vercel)
+
+O backend é servido pela [serverless function](./api/%5B...path%5D.ts).
+O frontend é gerado como SPA estática (`client/dist`).
+
+Variáveis de ambiente necessárias no painel Vercel:
+
+| Variável       | Descrição                      |
+|----------------|--------------------------------|
+| `DATABASE_URL` | Connection string do Supabase  |
+| `JWT_SECRET`   | Secret para tokens de sessão   |
+
+```bash
+# Build local (opcional — Vercel faz automaticamente)
+npm run build
+
+# Deploy: push para main dispara deploy automático via Vercel Git Integration
+git push origin main
+```
+
+---
+
+## Funcionalidades
+
+- **Blog** — artigos em tempo real via DEV.to API, filtro por tag e paginação
+- **Contato** — formulário com persistência em PostgreSQL + fallback para WhatsApp
+- **i18n** — PT-BR e EN
+- **Tema** — dark / light mode
+- **SEO** — meta tags, Open Graph, sitemap, robots.txt, Schema.org structured data
+- **Performance** — lazy loading, preload de assets críticos, Service Worker offline
