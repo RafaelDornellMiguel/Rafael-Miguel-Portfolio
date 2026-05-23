@@ -1,64 +1,42 @@
-import { useState, useEffect } from 'react';
-import AOS from 'aos';
+import { useState } from 'react';
 import { trpc } from '@/lib/trpc';
-import { useTranslation } from '@/hooks/useTranslation';
+import { ArrowRight, RefreshCw } from 'lucide-react';
+import { Link } from 'wouter';
 import './News.css';
 
-// Skeleton Card Component
-function SkeletonCard() {
-  return (
-    <div className="news-card skeleton">
-      <div className="skeleton-header">
-        <div className="skeleton-emoji"></div>
-        <div className="skeleton-category"></div>
-      </div>
-      <div className="skeleton-title"></div>
-      <div className="skeleton-description"></div>
-      <div className="skeleton-footer"></div>
-      <div className="skeleton-link"></div>
-    </div>
-  );
-}
+const TAGS = [
+  { id: 'technology', label: 'Tecnologia' },
+  { id: 'data',       label: 'Dados' },
+  { id: 'python',     label: 'Python' },
+  { id: 'sql',        label: 'SQL' },
+  { id: 'etl',        label: 'ETL' },
+];
 
 export default function News() {
-  const { t } = useTranslation();
   const [selectedTag, setSelectedTag] = useState('technology');
-  
-  const { data: news = [], isLoading, isError, refetch } = trpc.news.getLatest.useQuery(
+
+  const { data: articles = [], isLoading, isError, refetch } = trpc.news.getLatest.useQuery(
     { tag: selectedTag, limit: 6 },
-    { retry: 2, retryDelay: 800 },
+    { retry: 1, retryDelay: 1000 },
   );
 
-  useEffect(() => {
-    AOS.refresh();
-  }, [news]);
-
-  const tags = [
-    { id: 'technology', label: t('news.technology') || 'Tecnologia' },
-    { id: 'data', label: t('news.data') || 'Dados' },
-    { id: 'python', label: t('news.python') || 'Python' },
-    { id: 'sql', label: t('news.sql') || 'SQL' },
-    { id: 'etl', label: t('news.etl') || 'ETL' },
-  ];
-
   return (
-    <section className="news-section" id="news" data-aos="fade-up">
+    <section className="news-section" id="news" aria-label="Artigos e notícias">
       <div className="news-wrapper">
-        {/* Header */}
+
         <div className="news-header">
-          <p className="section-label">{t('news.label') || 'NOTÍCIAS'}</p>
-          <h2 className="news-title">{t('news.title') || 'Notícias & Artigos em Tempo Real'}</h2>
+          <p className="section-label">Artigos</p>
+          <h2 className="news-title">Notícias & Artigos em Tempo Real</h2>
           <p className="news-subtitle">
-            {t('news.subtitle') || 'Acompanhe as últimas novidades sobre tecnologia, dados e desenvolvimento'}
+            Conteúdo atualizado via DEV.to sobre tecnologia, dados e engenharia de software
           </p>
         </div>
 
-        {/* Category Filter */}
-        <div className="news-filters">
-          {tags.map(tag => (
+        <div className="news-filters" role="group" aria-label="Filtrar por categoria">
+          {TAGS.map(tag => (
             <button
               key={tag.id}
-              className={`filter-btn ${selectedTag === tag.id ? 'active' : ''}`}
+              className={`filter-btn${selectedTag === tag.id ? ' active' : ''}`}
               onClick={() => setSelectedTag(tag.id)}
             >
               {tag.label}
@@ -67,75 +45,68 @@ export default function News() {
         </div>
 
         {isError && (
-          <p className="news-error" style={{ textAlign: 'center', marginBottom: '1rem', color: 'var(--muted)' }}>
-            Não foi possível carregar as notícias.{' '}
-            <button type="button" onClick={() => refetch()} style={{ color: 'var(--accent)', textDecoration: 'underline', background: 'none', border: 0, cursor: 'pointer' }}>
-              Tentar novamente
+          <div style={{ textAlign: 'center', padding: '2rem 0', color: 'var(--text-muted)' }}>
+            Não foi possível carregar os artigos.{' '}
+            <button
+              onClick={() => refetch()}
+              style={{ color: 'var(--accent)', display: 'inline-flex', alignItems: 'center', gap: '0.3rem', background: 'none', border: 'none', cursor: 'pointer', fontSize: 'inherit' }}
+            >
+              <RefreshCw size={14} /> Tentar novamente
             </button>
-          </p>
-        )}
-
-        {/* News Grid */}
-        <div className="news-grid">
-          {isLoading ? (
-            // Skeleton Loading
-            <>
-              {[...Array(6)].map((_, i) => (
-                <SkeletonCard key={i} />
-              ))}
-            </>
-          ) : news.length > 0 ? (
-            news.map((article) => (
-              <a
-                key={article.id}
-                href={article.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="news-card"
-                data-aos="fade-up"
-              >
-                {/* Card Header */}
-                <div className="news-card-header">
-                  <span className="news-emoji">📰</span>
-                  <span className="news-category">{article.tags?.[0] || 'TECH'}</span>
-                </div>
-
-                {/* Title */}
-                <h3 className="news-card-title">{article.title}</h3>
-
-                {/* Description */}
-                <p className="news-card-description">{article.description}</p>
-
-                {/* Footer */}
-                <div className="news-card-footer">
-                  <span className="news-source">{article.author || 'Dev.to'}</span>
-                  <span className="news-date">
-                    {new Date(article.publishedAt).toLocaleDateString('pt-BR')}
-                  </span>
-                </div>
-
-                {/* CTA */}
-                <a href={article.url} className="news-card-link" onClick={(e) => e.preventDefault()}>
-                  {t('news.readMore') || 'Ler Artigo'}
-                  <i className="bx bx-right-arrow-alt"></i>
-                </a>
-              </a>
-            ))
-          ) : (
-            <div className="news-empty">
-              <i className="bx bx-inbox" style={{ fontSize: '48px', marginBottom: '16px' }}></i>
-              <p>{t('news.empty') || 'Nenhum artigo encontrado'}</p>
-            </div>
-          )}
-        </div>
-
-        {/* Updated Info */}
-        {!isLoading && news.length > 0 && (
-          <div className="news-updated">
-            <i className="bx bx-check-circle"></i>
-            {t('news.updated') || 'Atualizado em tempo real via Dev.to'}
           </div>
         )}
+
+        <div className="news-grid">
+          {isLoading
+            ? Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="news-card skeleton">
+                  <div className="skeleton-header" />
+                  <div className="skeleton-title" />
+                  <div className="skeleton-description" />
+                  <div className="skeleton-footer" />
+                  <div className="skeleton-link" />
+                </div>
+              ))
+            : articles.length > 0
+            ? articles.map(article => (
+                <a
+                  key={article.id}
+                  href={article.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="news-card"
+                >
+                  <div className="news-card-header">
+                    <span className="news-category">{article.tags?.[0] || 'TECH'}</span>
+                  </div>
+                  <h3 className="news-card-title">{article.title}</h3>
+                  <p className="news-card-description">{article.description}</p>
+                  <div className="news-card-footer">
+                    <span className="news-source">{article.author || 'Dev.to'}</span>
+                    <span className="news-date">
+                      {new Date(article.publishedAt).toLocaleDateString('pt-BR')}
+                    </span>
+                  </div>
+                  <span className="news-card-link">
+                    Ler artigo <ArrowRight size={14} />
+                  </span>
+                </a>
+              ))
+            : !isError && (
+                <div className="news-empty">
+                  <p>Nenhum artigo encontrado nesta categoria.</p>
+                </div>
+              )}
+        </div>
+
+        {!isLoading && articles.length > 0 && (
+          <div className="news-cta">
+            <Link href="/blog" className="news-cta-btn">
+              Ver todos os artigos <ArrowRight size={16} />
+            </Link>
+          </div>
+        )}
+
       </div>
     </section>
   );

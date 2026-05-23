@@ -1,85 +1,38 @@
-/* About Section */
 .about-section {
-  padding: 6rem 5%;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding: 5rem 0;
+  border-top: 1px solid var(--border);
 }
-
-.about-grid {
+.about-wrapper {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
 }
-
-@media (max-width: 768px) {
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-}
-
-.about-image-wrapper {
-  position: relative;
-}
-
-.about-img-wrap {
+.about-content {}
+.about-image img {
   width: 100%;
-  aspect-ratio: 1;
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--border-color);
-  object-fit: cover;
-  display: block;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
 }
-
-.section-label {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 1rem;
-}
-
-.about-title {
-  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
-  font-weight: 800;
-  line-height: 1.15;
-  margin-bottom: 1.2rem;
-  color: var(--text);
-}
-
-.about-text {
-  font-size: 0.9rem;
-  line-height: 1.8;
-  color: var(--muted);
-  margin-bottom: 1.8rem;
-}
-
-.about-text strong {
-  color: var(--text);
-  font-weight: 600;
-}
-
-.tech-pills {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-}
-
-.tech-pill {
-  padding: 0.7rem 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
+.about-title { font-size: clamp(1.5rem,3vw,2rem); margin-bottom: 1rem; }
+.about-text { color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.9375rem; }
+.about-skills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.about-skill {
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 99px;
   font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text);
-  text-align: center;
-  transition: all var(--transition);
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: border-color 0.15s, color 0.15s;
 }
-
-.tech-pill:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+.about-skill:hover { border-color: var(--accent); color: var(--accent); }
+@media (max-width: 768px) {
+  .about-wrapper { grid-template-columns: 1fr; gap: 2rem; }
+  .about-image { order: -1; }
+  .about-image img { max-width: 280px; margin: 0 auto; }
 }

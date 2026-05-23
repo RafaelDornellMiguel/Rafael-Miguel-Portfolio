@@ -1,6 +1,4 @@
 import { z } from "zod";
-import axios from "axios";
-
 import { publicProcedure, router } from "../_core/trpc.js";
 
 const DEVTO_API = "https://dev.to/api/articles";
@@ -67,19 +65,25 @@ async function fetchDevToArticles(tag: string, limit: number): Promise<DevToArti
   console.log("[NEWS_API] Fetching:", url);
 
   try {
-    const response = await axios.get<DevToArticle[]>(url, {
-      timeout: 10000,
+    const response = await fetch(url, {
+      signal: AbortSignal.timeout(10_000),
       headers: {
         Accept: "application/json",
-        "User-Agent": "rafael-portfolio",
+        "User-Agent": "rafael-portfolio/1.0",
       },
     });
 
-    if (!Array.isArray(response.data)) {
+    if (!response.ok) {
+      throw new Error(`DEV.to API respondeu com status ${response.status}`);
+    }
+
+    const data = await response.json() as unknown;
+
+    if (!Array.isArray(data)) {
       throw new Error("DEV.to retornou formato inválido");
     }
 
-    return response.data;
+    return data as DevToArticle[];
   } catch (err) {
     console.error("[NEWS_API_ERROR]", err);
     return [];

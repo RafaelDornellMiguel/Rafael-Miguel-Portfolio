@@ -7,137 +7,124 @@ import { Sun, Moon, Menu, X } from 'lucide-react';
 import './Header.css';
 
 export default function Header() {
-  const [location, navigate] = useLocation();
+  const [, navigate] = useLocation();
   const { theme, toggleTheme } = useTheme();
   const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
+  const scrollTo = (id: string) => {
     setMobileMenuOpen(false);
-    
-    if (location !== '/') {
-      navigate('/');
-      setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) element.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
     } else {
-      const element = document.getElementById(id);
-      if (element) element.scrollIntoView({ behavior: 'smooth' });
+      navigate('/');
+      setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 120);
     }
   };
 
   const navItems = [
-    { label: t('nav.sobre'), id: 'about' },
-    { label: t('nav.servicos'), id: 'services' },
-    { label: t('nav.projetos'), id: 'work' },
-    { label: t('nav.curriculo'), id: 'curriculo' },
-    { label: t('nav.blog') || 'Blog', id: 'blog' },
+    { label: t('nav.sobre') || 'Sobre', id: 'about' },
+    { label: t('nav.servicos') || 'Serviços', id: 'services' },
+    { label: t('nav.projetos') || 'Projetos', id: 'work' },
+    { label: t('nav.curriculo') || 'Currículo', id: 'curriculo' },
   ];
 
   return (
-    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+    <header className={`header ${isScrolled ? 'scrolled' : ''}`} role="banner">
       <div className="header-container">
+
         {/* Logo */}
         <Link href="/">
-          <div className="logo" tabIndex={0} role="button">
-            <span className="logo-text">RM</span>
+          <div className="logo" role="link" aria-label="Rafael Dornell Miguel — home">
+            <span className="logo-text">Rafael Miguel</span>
+            <span className="logo-dot" aria-hidden="true" />
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="nav-desktop" aria-label="Navigation principal">
-          {navItems.slice(0, 4).map((item) => (
+        {/* Desktop nav */}
+        <nav className="nav-desktop" aria-label="Navegação principal">
+          {navItems.map(item => (
             <a
               key={item.id}
               href={`/#${item.id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection(item.id);
-              }}
               className="nav-link"
+              onClick={e => { e.preventDefault(); scrollTo(item.id); }}
             >
               {item.label}
             </a>
           ))}
-          <a href="/#blog" onClick={(e) => {
-            e.preventDefault();
-            navigate('/blog');
-          }} className="nav-link">
-            {t('nav.blog') || 'Blog'}
+          <a
+            href="/blog"
+            className="nav-link"
+            onClick={e => { e.preventDefault(); navigate('/blog'); }}
+          >
+            Blog
           </a>
         </nav>
 
-        {/* Right controls */}
+        {/* Controls */}
         <div className="header-controls">
           <LanguageSwitcher />
           <button
             className="theme-toggle"
             onClick={toggleTheme}
-            aria-label={theme === 'light' ? 'Ativar modo escuro' : 'Ativar modo claro'}
-            title={theme === 'light' ? 'Dark mode' : 'Light mode'}
+            aria-label={theme === 'dark' ? 'Modo claro' : 'Modo escuro'}
           >
-            {theme === 'light' ? (
-              <Moon size={20} />
-            ) : (
-              <Sun size={20} />
-            )}
+            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
           </button>
-          <a href="/#contato" className="btn-contact" onClick={(e) => {
-            e.preventDefault();
-            scrollToSection('contato');
-          }}>
-            {t('contact.submit')}
+          <a
+            href="/#contato"
+            className="btn-contact"
+            onClick={e => { e.preventDefault(); scrollTo('contato'); }}
+          >
+            Contato
           </a>
-
-          {/* Mobile Menu Button */}
           <button
             className="btn-menu"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Abrir menu"
+            onClick={() => setMobileMenuOpen(v => !v)}
+            aria-label="Menu"
             aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       {mobileMenuOpen && (
-        <nav className="mobile-menu" role="navigation" aria-label="Menu de navegação mobile">
+        <nav className="mobile-menu" aria-label="Menu mobile">
           <div className="mobile-menu-content">
-            {navItems.map((item) => (
+            {navItems.map(item => (
               <a
                 key={item.id}
                 href={`/#${item.id}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (item.id === 'blog') {
-                    navigate('/blog');
-                  } else {
-                    scrollToSection(item.id);
-                  }
-                }}
                 className="mobile-nav-link"
+                onClick={e => { e.preventDefault(); scrollTo(item.id); }}
               >
                 {item.label}
               </a>
             ))}
-            <a href="/#contato" className="mobile-nav-cta" onClick={(e) => {
-              e.preventDefault();
-              scrollToSection('contato');
-            }}>
-              {t('contact.submit')}
+            <a
+              href="/blog"
+              className="mobile-nav-link"
+              onClick={e => { e.preventDefault(); setMobileMenuOpen(false); navigate('/blog'); }}
+            >
+              Blog
+            </a>
+            <a
+              href="/#contato"
+              className="mobile-nav-cta"
+              onClick={e => { e.preventDefault(); scrollTo('contato'); }}
+            >
+              Entrar em contato
             </a>
           </div>
         </nav>
