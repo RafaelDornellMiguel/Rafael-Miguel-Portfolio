@@ -1,6 +1,5 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink, TRPCClientError } from "@trpc/client";
 import superjson from "superjson";
@@ -41,28 +40,17 @@ queryClient.getQueryCache().subscribe((event) => {
   }
 });
 
-// 3. Cliente tRPC - Configuração Direta
-// Removido qualquer wrapper de fetch para evitar conflito com o transformer
+// 3. Cliente tRPC com transformer superjson (alinhado com o servidor)
 const trpcClient = trpc.createClient({
+  transformer: superjson,
   links: [
     httpBatchLink({
-      url: import.meta.env.VITE_SUPABASE_URL 
-        ? `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/trpc`
-        : "/api/trpc",
+      url: "/api/trpc",
     }),
   ],
 });
 
-// 4. Router
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <div className="p-10">Erro crítico ao carregar interface.</div>,
-  },
-]);
-
-// 5. Analytics
+// 4. Analytics opcional
 const loadAnalytics = () => {
   const endpoint = import.meta.env.VITE_ANALYTICS_ENDPOINT;
   const siteId = import.meta.env.VITE_ANALYTICS_WEBSITE_ID;
@@ -75,14 +63,14 @@ const loadAnalytics = () => {
   }
 };
 
-// 6. Render
+// 5. Render — wouter em App.tsx é o único roteador (react-router-dom removido)
 const container = document.getElementById("root");
 if (container) {
   createRoot(container).render(
     <React.StrictMode>
       <trpc.Provider client={trpcClient} queryClient={queryClient}>
         <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
+          <App />
         </QueryClientProvider>
       </trpc.Provider>
     </React.StrictMode>

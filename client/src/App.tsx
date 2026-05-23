@@ -31,10 +31,10 @@ function HomePage() {
   usePreloadAssets({
     images: [
       '/img/rafael-profile.jpg.png',
-      '/public/img/service-ETL.png',
-      '/public/img/service-analise.png',
-      '/public/img/service-03_Power.png',
-      '/public/img/service-consultoria.png',
+      '/img/service-ETL.png',
+      '/img/service-analise.png',
+      '/img/service-Power.png',
+      '/img/service-consultoria.png',
       '/img/project-01.png',
       '/img/project-02.png',
       '/img/project-03.png',
@@ -42,8 +42,8 @@ function HomePage() {
       '/img/project-05.png',
     ],
     videos: [
-      'client/public/img/gif_7d02e1e5.mp4',
-      'client/public/img/gif2_b7dba10d.mp4',
+      '/img/gif_7d02e1e5.mp4',
+      '/img/gif2_b7dba10d.mp4',
     ],
   });
 
@@ -69,9 +69,9 @@ function HomePage() {
         <meta property="og:type" content="website" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://rafael-miguel-portfolio.vercel.app/" />
-        <link rel="preload" as="image" href="/public/img/rafael-profile.jpg.png" />
-        <link rel="preload" as="video" href="/public/img/gif_7d02e1e5.mp4" />
-        <link rel="preload" as="image" href="/public/img/service-ETL.png" />
+        <link rel="preload" as="image" href="/img/rafael-profile.jpg.png" />
+        <link rel="preload" as="video" href="/img/gif_7d02e1e5.mp4" />
+        <link rel="preload" as="image" href="/img/service-ETL.png" />
         <meta name="theme-color" content="#030303" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

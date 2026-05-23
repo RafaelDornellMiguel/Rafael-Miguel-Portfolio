@@ -4,13 +4,9 @@ import superjson from "superjson";
 import type { TrpcContext } from "./context";
 
 
-const t = initTRPC.create({
- // <--- OBRIGATÓRIO aqui
+const t = initTRPC.context<TrpcContext>().create({
+  transformer: superjson,
 });
-
-// const t = initTRPC.context<TrpcContext>().create({
-//   transformer: superjson,
-// });
 
 export const router = t.router;
 export const publicProcedure = t.procedure;
