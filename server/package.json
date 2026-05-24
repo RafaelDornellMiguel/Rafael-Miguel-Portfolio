@@ -1,7 +1,6 @@
 {
   "name": "portfolio-backend",
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development tsx watch --tsconfig tsconfig.json index.ts",
     "start": "cross-env NODE_ENV=production tsx --tsconfig tsconfig.json index.ts",
@@ -11,7 +10,6 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",
     "@trpc/server": "^10.45.2",
-    "axios": "^1.7.9",
     "cookie": "^1.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
