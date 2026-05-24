@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { X, ArrowRight } from 'lucide-react';
 import './ServiceModal.css';
 
 interface Service {
@@ -19,32 +21,46 @@ interface ServiceModalProps {
 }
 
 export default function ServiceModal({ service, onClose, onContactClick }: ServiceModalProps) {
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
 
   return (
-    <div className="modal active" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onClick={handleBackdropClick}>
-      <div className="modal-content">
-        <button className="modal-close" onClick={onClose} aria-label="Fechar modal">
-          <i className="bx bx-x"></i>
+    <div
+      className="modal-backdrop"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-heading"
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
+      <div className="modal-box">
+        <button className="modal-close-btn" onClick={onClose} aria-label="Fechar">
+          <X size={16} />
         </button>
-        <h2 className="modal-title" id="modalTitle">{service.modalTitle}</h2>
+
+        <h2 className="modal-heading" id="modal-heading">{service.modalTitle}</h2>
+
         <div className="modal-meta">
-          <div className="modal-meta-box">
+          <div className="modal-meta-item">
             <span>Investimento</span>
-            <b>{service.price}</b>
+            <strong>{service.price}</strong>
           </div>
-          <div className="modal-meta-box">
+          <div className="modal-meta-item">
             <span>Tempo Médio</span>
-            <b>{service.time}</b>
+            <strong>{service.time}</strong>
           </div>
         </div>
-        <p className="modal-desc">{service.description}</p>
-        <button className="btn-modal-cta" onClick={onContactClick}>
-          Fazer Orçamento
+
+        <p className="modal-description">{service.description}</p>
+
+        <button className="modal-cta" onClick={onContactClick}>
+          Fazer Orçamento <ArrowRight size={16} />
         </button>
       </div>
     </div>

@@ -1,69 +1,64 @@
 import { useEffect } from 'react';
 import AOS from 'aos';
 import { useTranslation } from '@/hooks/useTranslation';
+import { ArrowUpRight } from 'lucide-react';
 import './Projects.css';
 
 interface Project {
   id: string;
-  tag: string;
+  tags: string[];
   title: string;
   description: string;
   image: string;
   link: string;
   technologies: string[];
-  color: string;
 }
 
 const PROJECTS: Project[] = [
   {
     id: 'guia-etl',
-    tag: 'Guia ETL',
+    tags: ['ETL', 'Python'],
     title: 'Guia Prático de ETL',
-    description: 'Plataforma interativa com guias e ferramentas para aprender e dominar ETL. Desenvolvido com tecnologias modernas e deploy na Vercel.',
+    description: 'Plataforma interativa com guias e ferramentas para aprender e dominar ETL. Deploy na Vercel.',
     image: '/img/project-01.png',
     link: 'https://guia-elt.vercel.app/',
-    technologies: ['Python', 'ETL', 'Data Pipeline'],
-    color: '#10b981'
+    technologies: ['Python', 'ETL', 'Data Pipeline']
   },
   {
     id: 'stammers',
-    tag: 'Rock Band',
-    title: 'Stammers - Official',
-    description: 'Site oficial da banda Stammers. Design moderno com experiência imersiva para fãs. Vitrine completa da banda com integração de redes sociais.',
+    tags: ['React', 'Design'],
+    title: 'Stammers — Official',
+    description: 'Site oficial da banda Stammers. Design imersivo com integração de redes sociais e vitrine completa.',
     image: '/img/project-02.png',
     link: 'https://www.stammerofficial.com/',
-    technologies: ['React', 'Design', 'Web'],
-    color: '#f59e0b'
+    technologies: ['React', 'Design', 'Web']
   },
   {
     id: 'data-tools',
-    tag: 'Data Tools',
-    title: 'Ferramentas de Tratamento de Dados',
-    description: 'Suite completa de ferramentas para limpeza, transformação e análise de dados. Interface intuitiva e pronta para uso em produção.',
+    tags: ['Data Science'],
+    title: 'Ferramentas de Dados',
+    description: 'Suite completa de ferramentas para limpeza, transformação e análise de dados. Interface intuitiva e pronta para produção.',
     image: '/img/project-03.png',
     link: 'https://data-toolkit.streamlit.app/',
-    technologies: ['Streamlit', 'Pandas', 'Data Science'],
-    color: '#3b82f6'
+    technologies: ['Streamlit', 'Pandas', 'Data Science']
   },
   {
     id: 'crm',
-    tag: 'CRM',
+    tags: ['CRM', 'Automation'],
     title: 'CRM WhatsApp',
-    description: 'Sistema de CRM integrado com WhatsApp. Automação de comunicação, gestão de leads e histórico de conversas em um único lugar.',
+    description: 'Sistema de CRM integrado com WhatsApp. Automação de comunicação, gestão de leads e histórico de conversas.',
     image: '/img/project-04.png',
     link: 'https://github.com/RafaelDornellMiguel/CRM-WhatsApp',
-    technologies: ['WhatsApp API', 'CRM', 'Automation'],
-    color: '#25d366'
+    technologies: ['WhatsApp API', 'CRM', 'Automation']
   },
   {
     id: 'arquitetura',
-    tag: 'Artigo',
+    tags: ['Artigo', 'Arquitetura'],
     title: 'Arquitetura Limpa',
-    description: 'Guia e resumo sobre Arquitetura Limpa em desenvolvimento. Conceitos fundamentais, padrões de design e boas práticas documentadas.',
+    description: 'Guia e resumo sobre Arquitetura Limpa. Conceitos fundamentais, padrões de design e boas práticas documentadas.',
     image: '/img/project-05.png',
     link: 'https://www.notion.so/Arquiterura-Limpa-Development-21311cf0a24c815bac44e58ee434114b',
-    technologies: ['Architecture', 'Design Patterns', 'Best Practices'],
-    color: '#8b5cf6'
+    technologies: ['Architecture', 'Design Patterns', 'Best Practices']
   }
 ];
 
@@ -76,58 +71,48 @@ export default function Projects() {
 
   return (
     <section id="work" className="projects-section">
-      <div className="projects-container">
-        <p className="section-label">{t('projects.label') || 'Portfolio'}</p>
-        <h2 className="projects-title">{t('projects.title') || 'Projetos de Dados e Desenvolvimento'}</h2>
-        
-        <div className="work-grid">
+      <div className="projects-wrapper">
+
+        <div className="projects-header">
+          <p className="section-label">{t('projects.label') || 'Portfolio'}</p>
+          <h2 className="projects-title">{t('projects.title') || 'Projetos de Dados & Desenvolvimento'}</h2>
+        </div>
+
+        <div className="projects-grid">
           {PROJECTS.map((project, index) => (
             <a
               key={project.id}
               href={project.link}
-              className="work-card"
+              className="project-card"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${project.title} - ${project.description}`}
+              aria-label={project.title}
               data-aos="fade-up"
-              data-aos-delay={`${index * 100}`}
+              data-aos-delay={`${index * 80}`}
             >
-              {/* Background Image */}
-              <div 
-                className="work-card-image"
-                style={{ backgroundImage: `url('${project.image}')` }}
-              >
-                <div className="work-card-overlay"></div>
+              <div className="project-image">
+                <img src={project.image} alt={project.title} loading="lazy" />
               </div>
 
-              {/* Content */}
-              <div className="work-card-content">
-                <div className="work-card-header">
-                  <span className="work-card-tag" role="status">{project.tag}</span>
-                  <div className="work-card-icon">
-                    <i className="bx bx-up-arrow-alt"></i>
-                  </div>
-                </div>
-
-                <h3 role="heading" aria-level={3}>{project.title}</h3>
-                <p>{project.description}</p>
-
-                {/* Technologies */}
-                <div className="work-card-tech">
-                  {project.technologies.map((tech, idx) => (
-                    <span key={idx} className="tech-badge">{tech}</span>
+              <div className="project-body">
+                <div className="project-tags">
+                  {project.tags.map(tag => (
+                    <span key={tag} className="project-tag">{tag}</span>
                   ))}
                 </div>
-
-                {/* CTA */}
-                <div className="work-card-cta">
-                  <span>{t('projects.viewMore') || 'Ver Projeto'}</span>
-                  <i className="bx bx-right-arrow-alt"></i>
+                <h3 className="project-title">{project.title}</h3>
+                <p className="project-desc">{project.description}</p>
+                <div className="project-links">
+                  <span className="project-link">
+                    {t('projects.viewMore') || 'Ver Projeto'}
+                    <ArrowUpRight size={14} />
+                  </span>
                 </div>
               </div>
             </a>
           ))}
         </div>
+
       </div>
     </section>
   );

@@ -1,183 +1,155 @@
-import { useState, useEffect } from 'react';
-import AOS from 'aos';
+import { useState } from 'react';
 import { trpc } from '@/lib/trpc';
 import { toast } from 'sonner';
 import SuccessModal from './SuccessModal';
+import { Send } from 'lucide-react';
 import './Contact.css';
 
 const WHATSAPP_NUMBER = '5547996825170';
 
-export default function Contact() {
-  const [formData, setFormData] = useState({
-    servico: 'etl',
-    desc: '',
-    nome: '',
-    whats: '',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
+const SERVICE_OPTIONS = [
+  { value: 'etl',         label: 'ETL & BI' },
+  { value: 'dados',       label: 'Eng. Dados' },
+  { value: 'backend',     label: 'Backend' },
+  { value: 'consultoria', label: 'Consultoria' },
+];
 
-  const createContactMutation = trpc.contact.create.useMutation({
+export default function Contact() {
+  const [form, setForm] = useState({ servico: 'etl', desc: '', nome: '', whats: '' });
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const mutation = trpc.contact.create.useMutation({
     onSuccess: () => {
-      setShowSuccessModal(true);
+      setSuccess(true);
       setTimeout(() => {
         const msg = encodeURIComponent(
-          `Olá Rafael! Tenho interesse em: *${formData.servico.toUpperCase()}*\n\nDescrição: ${formData.desc || '–'}\n\nNome/Empresa: ${formData.nome || '–'}\nWhatsApp: ${formData.whats || '–'}`,
+          `Olá Rafael! Interesse em: *${form.servico.toUpperCase()}*\n\nDescrição: ${form.desc || '–'}\n\nNome/Empresa: ${form.nome || '–'}\nWhatsApp: ${form.whats || '–'}`,
         );
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
       }, 800);
-      setFormData({
-        servico: 'etl',
-        desc: '',
-        nome: '',
-        whats: '',
-      });
-      setIsSubmitting(false);
+      setForm({ servico: 'etl', desc: '', nome: '', whats: '' });
+      setSubmitting(false);
     },
-    onError: (error) => {
-      toast.error(error.message || 'Erro ao enviar');
-      setIsSubmitting(false);
+    onError: (err) => {
+      toast.error(err.message || 'Erro ao enviar. Tente novamente.');
+      setSubmitting(false);
     },
   });
 
-  useEffect(() => {
-    AOS.refresh();
-  }, []);
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleServiceChange = (value: string) => {
-    setFormData((prev) => ({ ...prev, servico: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.nome.trim()) {
-      toast.error('Por favor, preencha seu nome');
-      return;
-    }
-    if (!formData.whats.trim()) {
-      toast.error('Por favor, preencha seu WhatsApp');
-      return;
-    }
-    if (!formData.desc.trim()) {
-      toast.error('Por favor, descreva o desafio');
-      return;
-    }
-
-    setIsSubmitting(true);
-    const cleanPhone = formData.whats.replace(/\D/g, '');
-    const validEmail = `${cleanPhone || 'contato'}@rafael-contact.local`;
-
-    createContactMutation.mutate({
-      name: formData.nome,
-      email: validEmail,
-      phone: formData.whats,
-      subject: `Interesse em: ${formData.servico.toUpperCase()}`,
-      message: formData.desc,
+    if (!form.nome.trim())  { toast.error('Preencha seu nome');         return; }
+    if (!form.whats.trim()) { toast.error('Preencha seu WhatsApp');     return; }
+    if (!form.desc.trim())  { toast.error('Descreva o desafio');        return; }
+    setSubmitting(true);
+    const cleanPhone = form.whats.replace(/\D/g, '');
+    mutation.mutate({
+      name:    form.nome,
+      email:   `${cleanPhone || 'contato'}@rafael-contact.local`,
+      phone:   form.whats,
+      subject: `Interesse em: ${form.servico.toUpperCase()}`,
+      message: form.desc,
     });
   };
 
   return (
-    <section id="contato" className="contact-section" aria-labelledby="contact-title">
+    <section id="contato" className="contact-section" aria-labelledby="contact-heading">
       <div className="contact-wrapper" data-aos="fade-up">
-        <h2 id="contact-title" className="contact-title">Iniciar Projeto com Rafael Dornell Miguel</h2>
-        <p className="contact-sub">
-          Descreva seu problema e receba uma solução técnica sob medida em ETL, engenharia de dados ou
-          desenvolvimento.
-        </p>
+
+        <div className="contact-header">
+          <p className="section-label">Contato</p>
+          <h2 id="contact-heading">Iniciar um Projeto</h2>
+          <p className="contact-sub">
+            Descreva seu desafio e receba uma proposta técnica sob medida.
+          </p>
+        </div>
 
         <form onSubmit={handleSubmit} className="contact-form" noValidate>
-          <fieldset className="field-group">
-            <legend className="sr-only">Qual serviço você precisa?</legend>
-            <p className="field-label" aria-hidden="true">Qual serviço você precisa?</p>
-            <div className="service-pills" role="radiogroup">
-              {[
-                { value: 'etl', label: 'ETL & BI', icon: 'bx-bar-chart-alt-2' },
-                { value: 'dados', label: 'Eng. Dados', icon: 'bx-data' },
-                { value: 'backend', label: 'Backend', icon: 'bx-code-alt' },
-                { value: 'consultoria', label: 'Consultoria', icon: 'bx-bulb' },
-              ].map((service) => (
-                <label key={service.value} className={`pill-label ${formData.servico === service.value ? 'checked' : ''}`}>
+
+          {/* Service selector */}
+          <div className="form-group">
+            <p className="form-label">Qual serviço você precisa?</p>
+            <div className="service-type-row" role="radiogroup">
+              {SERVICE_OPTIONS.map(opt => (
+                <label
+                  key={opt.value}
+                  className={`service-type-pill${form.servico === opt.value ? ' active' : ''}`}
+                >
                   <input
                     type="radio"
                     name="servico"
-                    value={service.value}
-                    checked={formData.servico === service.value}
-                    onChange={(e) => handleServiceChange(e.target.value)}
-                    disabled={isSubmitting}
+                    value={opt.value}
+                    checked={form.servico === opt.value}
+                    onChange={e => setForm(p => ({ ...p, servico: e.target.value }))}
+                    disabled={submitting}
                     className="sr-only"
                   />
-                  <i className={`bx ${service.icon}`} aria-hidden="true"></i> <span>{service.label}</span>
+                  {opt.label}
                 </label>
               ))}
             </div>
-          </fieldset>
+          </div>
 
-          <div className="field-group">
-            <label htmlFor="desc">Descreva o desafio</label>
+          {/* Description */}
+          <div className="form-group">
+            <label className="form-label" htmlFor="contact-desc">Descreva o desafio</label>
             <textarea
-              id="desc"
+              id="contact-desc"
+              className="form-textarea"
               name="desc"
               rows={4}
-              placeholder="Explique brevemente o problema ou o processo que precisa ser otimizado…"
-              value={formData.desc}
-              onChange={handleInputChange}
+              placeholder="Explique o problema ou processo que precisa ser otimizado…"
+              value={form.desc}
+              onChange={e => setForm(p => ({ ...p, desc: e.target.value }))}
+              disabled={submitting}
               required
-              aria-required="true"
-              disabled={isSubmitting}
             />
           </div>
 
-          <div className="field-row">
-            <div className="field-group">
-              <label htmlFor="nome">Nome / Empresa</label>
+          {/* Name + WhatsApp */}
+          <div className="form-row">
+            <div className="form-group">
+              <label className="form-label" htmlFor="contact-nome">Nome / Empresa</label>
               <input
+                id="contact-nome"
+                className="form-input"
                 type="text"
-                id="nome"
                 name="nome"
                 placeholder="Ex: João Silva"
-                value={formData.nome}
-                onChange={handleInputChange}
+                value={form.nome}
+                onChange={e => setForm(p => ({ ...p, nome: e.target.value }))}
                 autoComplete="name"
+                disabled={submitting}
                 required
-                aria-required="true"
-                disabled={isSubmitting}
               />
             </div>
-            <div className="field-group">
-              <label htmlFor="whats">WhatsApp</label>
+            <div className="form-group">
+              <label className="form-label" htmlFor="contact-whats">WhatsApp</label>
               <input
+                id="contact-whats"
+                className="form-input"
                 type="tel"
-                id="whats"
                 name="whats"
                 placeholder="(47) 9 0000-0000"
-                value={formData.whats}
-                onChange={handleInputChange}
+                value={form.whats}
+                onChange={e => setForm(p => ({ ...p, whats: e.target.value }))}
                 autoComplete="tel"
+                disabled={submitting}
                 required
-                aria-required="true"
-                disabled={isSubmitting}
               />
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="btn-submit"
-            disabled={isSubmitting}
-          >
-            <i className={`bx ${isSubmitting ? 'bx-loader-alt bx-spin' : 'bxl-whatsapp'}`} aria-hidden="true"></i>
-            <span>{isSubmitting ? 'Enviando...' : 'Enviar solicitação'}</span>
+          <button type="submit" className="form-submit" disabled={submitting}>
+            <Send size={16} />
+            {submitting ? 'Enviando…' : 'Enviar solicitação'}
           </button>
+
         </form>
       </div>
-      <SuccessModal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)} />
+
+      <SuccessModal isOpen={success} onClose={() => setSuccess(false)} />
     </section>
   );
 }
