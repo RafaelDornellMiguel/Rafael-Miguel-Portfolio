@@ -4,4 +4,6 @@
   "outputDirectory": "client/dist",
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/[...path]" },
-    { "source": "/((?!api/).*)", "desti
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
+}
