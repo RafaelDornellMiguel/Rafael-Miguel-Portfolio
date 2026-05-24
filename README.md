@@ -1,6 +1,6 @@
 # Rafael Dornell Miguel — Portfólio
 
-Portfólio pessoal de **Rafael Dornell Miguel**, desenvolvedor de software e engenheiro de dados especializado em ETL, pipelines de dados e automação.
+Portfólio pessoal de **(Meu)Rafael Dornell Miguel**, desenvolvedor de software e engenheiro de dados especializado em ETL, pipelines de dados e automação.
 
 🔗 **Live:** [rafael-miguel-portfolio.vercel.app](https://rafael-miguel-portfolio.vercel.app)
 
