@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { trpc } from '@/lib/trpc';
 import { toast } from 'sonner';
 import SuccessModal from './SuccessModal';
-import { Send } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import './Contact.css';
 
 const WHATSAPP_NUMBER = '5547996825170';
@@ -15,8 +15,8 @@ const SERVICE_OPTIONS = [
 ];
 
 export default function Contact() {
-  const [form, setForm] = useState({ servico: 'etl', desc: '', nome: '', whats: '' });
-  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm]       = useState({ servico: 'etl', desc: '', nome: '', whats: '' });
+  const [submitting, setSub]  = useState(false);
   const [success, setSuccess] = useState(false);
 
   const mutation = trpc.contact.create.useMutation({
@@ -29,24 +29,24 @@ export default function Contact() {
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
       }, 800);
       setForm({ servico: 'etl', desc: '', nome: '', whats: '' });
-      setSubmitting(false);
+      setSub(false);
     },
     onError: (err) => {
       toast.error(err.message || 'Erro ao enviar. Tente novamente.');
-      setSubmitting(false);
+      setSub(false);
     },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.nome.trim())  { toast.error('Preencha seu nome');         return; }
-    if (!form.whats.trim()) { toast.error('Preencha seu WhatsApp');     return; }
-    if (!form.desc.trim())  { toast.error('Descreva o desafio');        return; }
-    setSubmitting(true);
-    const cleanPhone = form.whats.replace(/\D/g, '');
+    if (!form.nome.trim())  { toast.error('Preencha seu nome');      return; }
+    if (!form.whats.trim()) { toast.error('Preencha seu WhatsApp');  return; }
+    if (!form.desc.trim())  { toast.error('Descreva o desafio');     return; }
+    setSub(true);
+    const phone = form.whats.replace(/\D/g, '');
     mutation.mutate({
       name:    form.nome,
-      email:   `${cleanPhone || 'contato'}@rafael-contact.local`,
+      email:   `${phone || 'contato'}@rafael-contact.local`,
       phone:   form.whats,
       subject: `Interesse em: ${form.servico.toUpperCase()}`,
       message: form.desc,
@@ -67,7 +67,6 @@ export default function Contact() {
 
         <form onSubmit={handleSubmit} className="contact-form" noValidate>
 
-          {/* Service selector */}
           <div className="form-group">
             <p className="form-label">Qual serviço você precisa?</p>
             <div className="service-type-row" role="radiogroup">
@@ -91,7 +90,6 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Description */}
           <div className="form-group">
             <label className="form-label" htmlFor="contact-desc">Descreva o desafio</label>
             <textarea
@@ -107,7 +105,6 @@ export default function Contact() {
             />
           </div>
 
-          {/* Name + WhatsApp */}
           <div className="form-row">
             <div className="form-group">
               <label className="form-label" htmlFor="contact-nome">Nome / Empresa</label>
@@ -115,7 +112,6 @@ export default function Contact() {
                 id="contact-nome"
                 className="form-input"
                 type="text"
-                name="nome"
                 placeholder="Ex: João Silva"
                 value={form.nome}
                 onChange={e => setForm(p => ({ ...p, nome: e.target.value }))}
@@ -130,7 +126,6 @@ export default function Contact() {
                 id="contact-whats"
                 className="form-input"
                 type="tel"
-                name="whats"
                 placeholder="(47) 9 0000-0000"
                 value={form.whats}
                 onChange={e => setForm(p => ({ ...p, whats: e.target.value }))}
@@ -142,8 +137,8 @@ export default function Contact() {
           </div>
 
           <button type="submit" className="form-submit" disabled={submitting}>
-            <Send size={16} />
-            {submitting ? 'Enviando…' : 'Enviar solicitação'}
+            <WhatsAppIcon size={18} />
+            {submitting ? 'Enviando…' : 'Enviar pelo WhatsApp'}
           </button>
 
         </form>

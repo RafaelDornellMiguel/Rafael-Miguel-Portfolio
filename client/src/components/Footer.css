@@ -38,3 +38,5 @@
 @media (max-width: 480px) {
   .footer-inner { flex-direction: column; text-align: center; }
 }
+
+.footer-link--wa:hover { color: #25d366; border-color: #25d366; }

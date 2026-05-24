@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
+import { X } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import './SuccessModal.css';
 
 interface SuccessModalProps {
@@ -7,68 +9,63 @@ interface SuccessModalProps {
 }
 
 export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   const handleClose = useCallback(() => {
-    setIsVisible(false);
-    setTimeout(() => {
-      onClose();
-    }, 300);
+    setVisible(false);
+    setTimeout(onClose, 280);
   }, [onClose]);
 
   useEffect(() => {
     if (isOpen) {
-      setIsVisible(true);
-      const timer = setTimeout(() => {
-        handleClose();
-      }, 5000);
-      return () => clearTimeout(timer);
+      setVisible(true);
+      const t = setTimeout(handleClose, 5000);
+      return () => clearTimeout(t);
     }
   }, [isOpen, handleClose]);
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        handleClose();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape' && isOpen) handleClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, [isOpen, handleClose]);
 
-  if (!isOpen && !isVisible) return null;
+  if (!isOpen && !visible) return null;
 
   return (
-    <div 
-      className={`success-modal-overlay ${isVisible ? 'visible' : ''}`} 
+    <div
+      className={`success-modal-overlay${visible ? ' visible' : ''}`}
       onClick={handleClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="success-title"
     >
-      <div className={`success-modal ${isVisible ? 'visible' : ''}`} onClick={(e) => e.stopPropagation()}>
-        <div className="success-icon">
-          <svg viewBox="0 0 52 52">
-            <circle className="success-circle" cx="26" cy="26" r="25" fill="none" stroke="currentColor" strokeWidth="2" />
-            <path className="success-check" fill="none" stroke="currentColor" strokeWidth="2" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-          </svg>
-        </div>
-        
-        <h3 id="success-title" className="success-title">Mensagem Enviada com Sucesso!</h3>
-        <p className="success-message">Obrigado por entrar em contato. Você será redirecionado para o WhatsApp em breve.</p>
-        
-        <div className="success-info">
-          <p className="info-text">
-            <i className="bx bxl-whatsapp"></i>
-            Redirecionando para o WhatsApp...
-          </p>
-        </div>
-
+      <div
+        className={`success-modal${visible ? ' visible' : ''}`}
+        onClick={e => e.stopPropagation()}
+      >
         <button className="success-close" onClick={handleClose} aria-label="Fechar">
-          <i className="bx bx-x"></i>
+          <X size={15} />
         </button>
 
-        <div className="success-progress"></div>
+        <div className="success-icon">
+          <svg viewBox="0 0 52 52" aria-hidden="true">
+            <circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" strokeWidth="2" />
+            <path fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" d="M14 27l8 8 16-16" />
+          </svg>
+        </div>
+
+        <h3 id="success-title" className="success-title">Mensagem Enviada!</h3>
+        <p className="success-message">
+          Obrigado pelo contato. Você será redirecionado para o WhatsApp em instantes.
+        </p>
+
+        <div className="success-info">
+          <WhatsAppIcon size={20} className="success-whatsapp-icon" />
+          <span>Redirecionando para o WhatsApp…</span>
+        </div>
+
+        <div className="success-progress" />
       </div>
     </div>
   );
