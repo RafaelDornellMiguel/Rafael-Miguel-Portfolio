@@ -56,17 +56,32 @@ export default createApiHandler({
     const host = String(req.headers.host ?? "");
     const country = String(req.headers["x-vercel-ip-country"] ?? "").slice(0, 2) || null;
 
-    await query(
-      `INSERT INTO page_views (path, referrer_host, country, device, visitor_hash)
-       VALUES ($1, $2, $3, $4, $5)`,
-      [
-        normalizePath(parsed.data.path),
-        extractReferrerHost(parsed.data.referrer, host),
-        country,
-        classifyDevice(userAgent),
-        buildVisitorHash(getClientIp(req), userAgent),
-      ],
-    );
+    // Medir é secundário: falha de gravação (tabela ainda não migrada, banco
+    // fora do ar) nunca vira 500 para quem está navegando. Registra e segue.
+    try {
+      await query(
+        `INSERT INTO page_views (path, referrer_host, country, device, visitor_hash)
+         VALUES ($1, $2, $3, $4, $5)`,
+        [
+          normalizePath(parsed.data.path),
+          extractReferrerHost(parsed.data.referrer, host),
+          country,
+          classifyDevice(userAgent),
+          buildVisitorHash(getClientIp(req), userAgent),
+        ],
+      );
+    } catch (cause) {
+      console.error(
+        JSON.stringify({
+          level: "error",
+          scope: "API:V1:EVENTS:PAGEVIEW",
+          error_location_code: "API:V1:EVENTS:PAGEVIEW:PERSIST_FAILED",
+          message: cause instanceof Error ? cause.message : "erro desconhecido",
+        }),
+      );
+      res.status(202).json({ status: "skipped" });
+      return;
+    }
 
     res.status(202).json({ status: "recorded" });
   },
