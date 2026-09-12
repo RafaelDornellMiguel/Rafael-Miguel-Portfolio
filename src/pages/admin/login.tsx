@@ -1,13 +1,15 @@
+import type { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 import { GithubIcon } from "@/components/BrandIcons";
+import { isAuthConfigured } from "@/lib/auth/guard";
 
 import styles from "./admin.module.css";
 
-export default function AdminLoginPage() {
+export default function AdminLoginPage({ configured }: { configured: boolean }) {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const hasError = typeof router.query.error === "string";
@@ -27,7 +29,14 @@ export default function AdminLoginPage() {
             Acesso restrito à conta administradora do site.
           </p>
 
-          {hasError && (
+          {!configured && (
+            <p className={styles.loginError} role="alert">
+              O painel ainda não foi configurado neste ambiente: faltam as
+              credenciais do GitHub OAuth. Consulte o .env.example.
+            </p>
+          )}
+
+          {configured && hasError && (
             <p className={styles.loginError} role="alert">
               Esta conta não tem permissão para entrar no painel.
             </p>
@@ -36,7 +45,7 @@ export default function AdminLoginPage() {
           <button
             type="button"
             className={styles.loginButton}
-            disabled={submitting}
+            disabled={submitting || !configured}
             onClick={() => {
               setSubmitting(true);
               void signIn("github", { callbackUrl: "/admin" });
@@ -54,3 +63,8 @@ export default function AdminLoginPage() {
     </>
   );
 }
+
+// Lido no servidor: o navegador nunca vê nome de variável de ambiente.
+export const getServerSideProps: GetServerSideProps<{ configured: boolean }> = async () => ({
+  props: { configured: isAuthConfigured() },
+});
