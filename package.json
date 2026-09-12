@@ -2,7 +2,7 @@
   "name": "rafael-miguel-portfolio",
   "version": "2.0.0",
   "private": true,
-  "description": "Portfólio — Rafael Dornell Miguel",
+  "description": "Portf\u00f3lio \u2014 Rafael Dornell Miguel",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -26,6 +26,6 @@
     "typescript": "^5.4.5"
   },
   "engines": {
-    "node": ">=20.9.0"
+    "node": "22.x"
   }
 }
