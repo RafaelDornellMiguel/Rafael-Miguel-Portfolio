@@ -1,0 +1,145 @@
+.header {
+  margin-bottom: var(--space-5);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.filter {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.filter:hover {
+  color: var(--fg-default);
+  border-color: var(--fg-subtle);
+}
+
+.filterActive {
+  background: var(--accent-subtle);
+  border-color: var(--accent-border);
+  color: var(--accent-fg);
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.skeleton {
+  min-height: 200px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-muted);
+  background: linear-gradient(
+    100deg,
+    var(--skeleton-base) 30%,
+    var(--skeleton-shine) 50%,
+    var(--skeleton-base) 70%
+  );
+  background-size: 220% 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 180% 0;
+  }
+  to {
+    background-position: -20% 0;
+  }
+}
+
+/* Erro estruturado: mensagem + ação orientada, como a API devolve. */
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  margin-bottom: var(--space-5);
+  border: 1px solid var(--danger-subtle);
+  border-left: 3px solid var(--danger-fg);
+  border-radius: var(--radius-md);
+  background: var(--canvas-subtle);
+}
+
+.errorMessage {
+  font-weight: 600;
+  color: var(--fg-default);
+}
+
+.errorAction {
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+}
+
+.retry {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--fg-default);
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.retry:hover {
+  border-color: var(--accent-border);
+  color: var(--accent-fg);
+}
+
+.errorCode {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--fg-subtle);
+}
+
+.empty {
+  padding: var(--space-7) 0;
+  text-align: center;
+  color: var(--fg-muted);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-6);
+}
+
+.seeAll {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 40px;
+  padding-inline: var(--space-5);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--fg-default);
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.seeAll:hover {
+  border-color: var(--accent-border);
+  color: var(--accent-fg);
+}

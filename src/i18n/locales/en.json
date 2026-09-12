@@ -1,0 +1,101 @@
+{
+  "nav": {
+    "sobre": "About",
+    "servicos": "Services",
+    "projetos": "Projects",
+    "curriculo": "Resume",
+    "contato": "Contact",
+    "blog": "Blog"
+  },
+  "hero": {
+    "available": "Available for projects",
+    "description": "Developer focused on automation and data. I create systems that eliminate manual processes, reduce errors and increase operational efficiency in real companies. Specialist in ETL, data engineering and development with Python, SQL and Power BI.",
+    "ctaPrimary": "Discuss a project",
+    "ctaSecondary": "See projects",
+    "statsYears": "Years of experience",
+    "statsProjects": "Projects delivered",
+    "statsClients": "Clients served"
+  },
+  "about": {
+    "label": "Background",
+    "role1": "Developer",
+    "role2": "Data Engineer",
+    "description": "I work on developing data-driven solutions, focusing on ETL, automation and system integration. At Clinicorp Solution, I was responsible for critical data projects, including acting as a technical QA and developing internal tools that drastically reduced manual work.",
+    "experience": "I have practical experience with Python, SQL and JavaScript/TypeScript, creating APIs, pipelines and systems that connect different data sources with efficiency and reliability. My specialty is transforming data into actionable insights through ETL, Power BI and process automation."
+  },
+  "services": {
+    "label": "Services",
+    "title": "Corporate Solutions",
+    "subtitle": "Specialized in data, automation and backend development",
+    "cta": "Learn more",
+    "investment": "Investment",
+    "duration": "Average time",
+    "quote": "Request a quote"
+  },
+  "projects": {
+    "label": "Portfolio",
+    "title": "Data & Development Projects",
+    "viewMore": "View project"
+  },
+  "curriculum": {
+    "label": "Resume",
+    "title": "Professional Experience",
+    "experience": "Experience",
+    "skills": "Technical Skills",
+    "moreSkills": "More technologies",
+    "download": "Download PDF"
+  },
+  "news": {
+    "label": "Articles",
+    "title": "Real-Time News & Articles",
+    "subtitle": "Content updated via DEV.to about technology, data and software engineering",
+    "error": "Could not load the articles.",
+    "retry": "Try again",
+    "empty": "No articles found in this category.",
+    "readMore": "Read article",
+    "seeAll": "See all articles"
+  },
+  "blog": {
+    "back": "Back to home",
+    "label": "Blog",
+    "title": "Articles & Insights",
+    "subtitle": "Content about ETL, data engineering, Python, SQL and software development",
+    "search": "Search articles...",
+    "searchLabel": "Search",
+    "categories": "Categories",
+    "noArticles": "No articles found",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "Start a Project",
+    "subtitle": "Describe your challenge and receive a tailored technical proposal.",
+    "service": "What service do you need?",
+    "description": "Describe the challenge",
+    "descriptionPlaceholder": "Briefly explain the problem or process that needs to be optimized…",
+    "name": "Name / Company",
+    "namePlaceholder": "Ex: John Smith",
+    "phone": "WhatsApp",
+    "phonePlaceholder": "+55 (47) 9 0000-0000",
+    "submit": "Send via WhatsApp",
+    "submitting": "Sending…",
+    "successTitle": "Message sent!",
+    "successMessage": "Thank you for reaching out. You will be redirected to WhatsApp shortly.",
+    "redirecting": "Redirecting to WhatsApp…"
+  },
+  "footer": {
+    "rights": "All rights reserved"
+  },
+  "errors": {
+    "nameRequired": "Please fill in your name",
+    "phoneRequired": "Please fill in your WhatsApp",
+    "descriptionRequired": "Describe the challenge with at least 10 characters",
+    "network": "Connection failed. Check your internet and try again."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The address you accessed does not exist or has been moved.",
+    "back": "Back to home"
+  }
+}
