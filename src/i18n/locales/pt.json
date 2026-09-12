@@ -48,12 +48,15 @@
   "news": {
     "label": "Artigos",
     "title": "Notícias & Artigos em Tempo Real",
-    "subtitle": "Conteúdo atualizado via DEV.to sobre tecnologia, dados e engenharia de software",
+    "subtitle": "Conteúdo em português via TabNews e internacional via DEV.to sobre dados, engenharia e software",
     "error": "Não foi possível carregar os artigos.",
     "retry": "Tentar novamente",
     "empty": "Nenhum artigo encontrado nesta categoria.",
     "readMore": "Ler artigo",
-    "seeAll": "Ver todos os artigos"
+    "seeAll": "Ver todos os artigos",
+    "sourcePt": "Português (TabNews)",
+    "sourceEn": "Internacional (DEV.to)",
+    "sourceLabel": "Fonte"
   },
   "blog": {
     "back": "Voltar para home",

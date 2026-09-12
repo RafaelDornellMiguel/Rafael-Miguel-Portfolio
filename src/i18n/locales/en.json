@@ -48,12 +48,15 @@
   "news": {
     "label": "Articles",
     "title": "Real-Time News & Articles",
-    "subtitle": "Content updated via DEV.to about technology, data and software engineering",
+    "subtitle": "Portuguese content via TabNews and international via DEV.to about data, engineering and software",
     "error": "Could not load the articles.",
     "retry": "Try again",
     "empty": "No articles found in this category.",
     "readMore": "Read article",
-    "seeAll": "See all articles"
+    "seeAll": "See all articles",
+    "sourcePt": "Portuguese (TabNews)",
+    "sourceEn": "International (DEV.to)",
+    "sourceLabel": "Source"
   },
   "blog": {
     "back": "Back to home",

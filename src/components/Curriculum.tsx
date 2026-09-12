@@ -41,7 +41,7 @@ export default function Curriculum() {
                     <span className={styles.year}>{experience.year}</span>
                     {experience.badge && <span className={styles.badge}>{experience.badge}</span>}
                   </div>
-                  <div className={styles.itemBody}>
+                  <div className={styles.itemBody} data-brand={experience.brand}>
                     <p className={styles.itemTitle}>{experience.title}</p>
                     <p className={styles.company}>{experience.company}</p>
                     <p className={styles.itemText}>{experience.description}</p>

@@ -87,7 +87,16 @@
   width: 7px;
   height: 7px;
   border-radius: var(--radius-full);
-  background: var(--accent-fg);
+  background: var(--brand, var(--accent-fg));
+}
+
+/* Cada empresa carrega sua cor no marcador e no nome. */
+.itemBody[data-brand="clinicorp"] {
+  --brand: var(--brand-clinicorp);
+}
+
+.itemBody[data-brand="multiplier"] {
+  --brand: var(--brand-multiplier);
 }
 
 .itemTitle {
@@ -97,7 +106,8 @@
 .company {
   margin-top: 2px;
   font-size: var(--text-sm);
-  color: var(--accent-fg);
+  font-weight: 600;
+  color: var(--brand, var(--accent-fg));
 }
 
 .itemText {

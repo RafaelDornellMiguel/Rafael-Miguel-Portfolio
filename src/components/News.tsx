@@ -2,7 +2,9 @@ import { ArrowRight, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
-import { newsTags } from "@/content/site";
+import type { ArticleSource } from "@/types/article";
+
+import { newsSources, newsTags } from "@/content/site";
 import { useNews } from "@/hooks/useNews";
 import { useReveal } from "@/hooks/useReveal";
 import { useTranslation } from "@/i18n";
@@ -13,8 +15,9 @@ import styles from "./News.module.css";
 export default function News() {
   const { t, language } = useTranslation();
   const ref = useReveal<HTMLDivElement>();
+  const [source, setSource] = useState<ArticleSource>(newsSources[0].id);
   const [tag, setTag] = useState<string>(newsTags[0].id);
-  const { articles, isLoading, error, refetch } = useNews(tag, 6);
+  const { articles, isLoading, error, refetch } = useNews(source, tag, 6);
 
   return (
     <section className="section" id="artigos">
@@ -25,19 +28,36 @@ export default function News() {
           <p className="sectionSubtitle">{t("news.subtitle")}</p>
         </header>
 
-        <div className={styles.filters} role="group" aria-label={t("news.label")}>
-          {newsTags.map((item) => (
+        <div className={styles.sources} role="group" aria-label={t("news.sourceLabel")}>
+          {newsSources.map((item) => (
             <button
               key={item.id}
               type="button"
-              className={`${styles.filter} ${tag === item.id ? styles.filterActive : ""}`}
-              onClick={() => setTag(item.id)}
-              aria-pressed={tag === item.id}
+              className={`${styles.source} ${source === item.id ? styles.sourceActive : ""}`}
+              onClick={() => setSource(item.id)}
+              aria-pressed={source === item.id}
             >
-              {item.label}
+              {t(item.labelKey)}
             </button>
           ))}
         </div>
+
+        {/* O TabNews não expõe filtro por tag na listagem — as tags só valem para o DEV.to. */}
+        {source === "devto" && (
+          <div className={styles.filters} role="group" aria-label={t("news.label")}>
+            {newsTags.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                className={`${styles.filter} ${tag === item.id ? styles.filterActive : ""}`}
+                onClick={() => setTag(item.id)}
+                aria-pressed={tag === item.id}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        )}
 
         {error && (
           <div className={styles.error} role="alert">

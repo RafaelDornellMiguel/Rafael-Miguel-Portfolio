@@ -34,6 +34,12 @@
   font-size: var(--text-xs);
 }
 
+/* O TabNews ganha o verde da casa; o DEV.to fica no neutro. */
+.category[data-source="devto"] {
+  background: var(--canvas-inset);
+  color: var(--fg-muted);
+}
+
 .reading {
   display: inline-flex;
   align-items: center;
@@ -45,6 +51,7 @@
 .title {
   font-size: var(--text-base);
   line-height: var(--leading-snug);
+  flex: 1;
 }
 
 .description {

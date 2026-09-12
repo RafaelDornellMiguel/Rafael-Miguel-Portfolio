@@ -48,6 +48,11 @@ export const site = {
   ],
 } as const;
 
+export const newsSources = [
+  { id: "tabnews", labelKey: "news.sourcePt" },
+  { id: "devto", labelKey: "news.sourceEn" },
+] as const;
+
 export const newsTags = [
   { id: "technology", label: "Tecnologia" },
   { id: "data", label: "Dados" },

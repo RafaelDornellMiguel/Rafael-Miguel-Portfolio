@@ -2,6 +2,38 @@
   margin-bottom: var(--space-5);
 }
 
+.sources {
+  display: inline-flex;
+  padding: 3px;
+  gap: 3px;
+  margin-bottom: var(--space-4);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: var(--canvas-subtle);
+}
+
+.source {
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.source:hover {
+  color: var(--fg-default);
+}
+
+.sourceActive {
+  background: var(--canvas-default);
+  color: var(--accent-fg);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;

@@ -3,6 +3,8 @@ export type Experience = {
   badge?: string;
   title: string;
   company: string;
+  /** Identidade visual da empresa — resolvida em cor no CSS. */
+  brand: "clinicorp" | "multiplier";
   description: string;
 };
 
@@ -12,6 +14,7 @@ export const experiences: Experience[] = [
     badge: "Atual",
     title: "Analista de Implantação & Integração de Dados",
     company: "Multiplier Tecnologia",
+    brand: "multiplier",
     description:
       "Implantação de soluções SaaS, análise e validação de dados relacionados à implementação de softwares e serviços da plataforma. Integrações técnicas em parceria com equipes de desenvolvimento, organização de fluxos operacionais, suporte técnico especializado, controle de chamados e processos de pós-venda. Responsável por: integração de sistemas, APIs REST, automação de processos, estruturação e validação de dados, gerenciamento de banco de dados, implantação de software, troubleshooting técnico e onboarding SaaS.",
   },
@@ -19,6 +22,7 @@ export const experiences: Experience[] = [
     year: "2022–",
     title: "Desenvolvedor & Analista de Dados (ETL)",
     company: "Clinicorp Solution",
+    brand: "clinicorp",
     description:
       "Desenvolvimento de pipelines ETL e automação de processos com Python e SQL. QA técnico em migrações críticas entre PostgreSQL, SQL Server e Firebird. Criação de ferramentas internas que reduziram significativamente o esforço operacional e aumentaram a eficiência da equipe.",
   },
