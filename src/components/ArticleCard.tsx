@@ -4,18 +4,27 @@ import type { Article } from "@/types/article";
 
 import styles from "./ArticleCard.module.css";
 
+const SOURCE_LABEL: Record<Article["source"], string> = {
+  devto: "DEV.to",
+  tabnews: "TabNews",
+};
+
 export default function ArticleCard({ article, locale }: { article: Article; locale: string }) {
   return (
     <a href={article.url} target="_blank" rel="noopener noreferrer" className={styles.card}>
       <div className={styles.top}>
-        <span className={styles.category}>{article.tags[0] ?? "dev"}</span>
-        <span className={styles.reading}>
-          <Clock size={12} /> {article.readingTime} min
+        <span className={styles.category} data-source={article.source}>
+          {SOURCE_LABEL[article.source]}
         </span>
+        {article.readingTime !== null && (
+          <span className={styles.reading}>
+            <Clock size={12} /> {article.readingTime} min
+          </span>
+        )}
       </div>
 
       <h3 className={styles.title}>{article.title}</h3>
-      <p className={styles.description}>{article.description}</p>
+      {article.description && <p className={styles.description}>{article.description}</p>}
 
       <div className={styles.footer}>
         <span className={styles.author}>{article.author}</span>

@@ -4,9 +4,10 @@ import { useMemo, useState } from "react";
 
 import ArticleCard from "@/components/ArticleCard";
 import Seo from "@/components/Seo";
-import { newsTags } from "@/content/site";
+import { newsSources, newsTags } from "@/content/site";
 import { useNews } from "@/hooks/useNews";
 import { useTranslation } from "@/i18n";
+import type { ArticleSource } from "@/types/article";
 
 import styles from "./blog.module.css";
 
@@ -14,11 +15,12 @@ const PAGE_SIZE = 9;
 
 export default function BlogPage() {
   const { t, language } = useTranslation();
+  const [source, setSource] = useState<ArticleSource>(newsSources[0].id);
   const [tag, setTag] = useState<string>(newsTags[0].id);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  const { articles, isLoading, error, refetch } = useNews(tag, 50);
+  const { articles, isLoading, error, refetch } = useNews(source, tag, 50);
 
   const filtered = useMemo(() => {
     const term = search.trim().toLowerCase();
@@ -72,23 +74,45 @@ export default function BlogPage() {
               />
             </div>
 
-            <p className={styles.sidebarTitle}>{t("blog.categories")}</p>
+            <p className={styles.sidebarTitle}>{t("news.sourceLabel")}</p>
             <div className={styles.tagList}>
-              {newsTags.map((item) => (
+              {newsSources.map((item) => (
                 <button
                   key={item.id}
                   type="button"
-                  className={`${styles.tagButton} ${tag === item.id ? styles.tagActive : ""}`}
+                  className={`${styles.tagButton} ${source === item.id ? styles.tagActive : ""}`}
                   onClick={() => {
-                    setTag(item.id);
+                    setSource(item.id);
                     setPage(1);
                   }}
-                  aria-pressed={tag === item.id}
+                  aria-pressed={source === item.id}
                 >
-                  {item.label}
+                  {t(item.labelKey)}
                 </button>
               ))}
             </div>
+
+            {source === "devto" && (
+              <>
+                <p className={styles.sidebarTitle}>{t("blog.categories")}</p>
+                <div className={styles.tagList}>
+                  {newsTags.map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      className={`${styles.tagButton} ${tag === item.id ? styles.tagActive : ""}`}
+                      onClick={() => {
+                        setTag(item.id);
+                        setPage(1);
+                      }}
+                      aria-pressed={tag === item.id}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
           </aside>
 
           <div>

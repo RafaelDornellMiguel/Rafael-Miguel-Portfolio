@@ -2,7 +2,7 @@
   "name": "rafael-miguel-portfolio",
   "version": "2.0.0",
   "private": true,
-  "description": "Portf\u00f3lio \u2014 Rafael Dornell Miguel",
+  "description": "Portfólio — Rafael Dornell Miguel",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,6 +13,7 @@
   "dependencies": {
     "lucide-react": "^1.45.0",
     "next": "16.3.5",
+    "next-auth": "^4.24.15",
     "pg": "^8.13.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

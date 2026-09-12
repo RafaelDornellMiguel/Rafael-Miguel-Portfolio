@@ -1,4 +1,4 @@
-import { Pool } from "pg";
+import { Pool, type QueryResultRow } from "pg";
 
 export type ContactRecord = {
   name: string;
@@ -43,14 +43,24 @@ function getPool(): Pool | null {
 }
 
 /**
- * Insert parametrizado: valor do usuário nunca é concatenado no SQL.
- * Retorna false quando não há banco configurado.
+ * Única porta de entrada no banco. `text` é sempre literal do código e os
+ * valores vão parametrizados — entrada de usuário nunca é concatenada em SQL.
  */
-export async function insertContact(record: ContactRecord): Promise<boolean> {
+export async function query<T extends QueryResultRow>(
+  text: string,
+  values: unknown[] = [],
+): Promise<T[]> {
   const database = getPool();
-  if (!database) return false;
+  if (!database) throw new Error("DATABASE_URL não configurada");
 
-  await database.query(
+  const result = await database.query<T>(text, values);
+  return result.rows;
+}
+
+export async function insertContact(record: ContactRecord): Promise<boolean> {
+  if (!isDatabaseConfigured()) return false;
+
+  await query(
     `INSERT INTO contacts (name, email, phone, subject, message)
      VALUES ($1, $2, $3, $4, $5)`,
     [record.name, record.email, record.phone, record.subject, record.message],
