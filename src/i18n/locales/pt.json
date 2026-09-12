@@ -1,0 +1,101 @@
+{
+  "nav": {
+    "sobre": "Sobre",
+    "servicos": "Serviços",
+    "projetos": "Projetos",
+    "curriculo": "Currículo",
+    "contato": "Contato",
+    "blog": "Blog"
+  },
+  "hero": {
+    "available": "Disponível para projetos",
+    "description": "Desenvolvedor focado em automação e dados. Crio sistemas que eliminam processos manuais, reduzem erros e aumentam eficiência operacional em empresas reais. Especialista em ETL, engenharia de dados e desenvolvimento com Python, SQL e Power BI.",
+    "ctaPrimary": "Falar sobre um projeto",
+    "ctaSecondary": "Ver projetos",
+    "statsYears": "Anos de experiência",
+    "statsProjects": "Projetos entregues",
+    "statsClients": "Clientes atendidos"
+  },
+  "about": {
+    "label": "Background",
+    "role1": "Desenvolvedor",
+    "role2": "Engenheiro de Dados",
+    "description": "Atuo no desenvolvimento de soluções orientadas a dados, com foco em ETL, automação e integração de sistemas. Na Clinicorp Solution, fui responsável por projetos críticos de dados, incluindo atuação como QA técnico e desenvolvimento de ferramentas internas que reduziram drasticamente o trabalho manual.",
+    "experience": "Tenho experiência prática com Python, SQL e JavaScript/TypeScript, criando APIs, pipelines e sistemas que conectam diferentes fontes de dados com eficiência e confiabilidade. Minha especialidade é transformar dados em insights acionáveis através de ETL, Power BI e automação de processos."
+  },
+  "services": {
+    "label": "Serviços",
+    "title": "Soluções Corporativas",
+    "subtitle": "Especializado em dados, automação e desenvolvimento backend",
+    "cta": "Saiba mais",
+    "investment": "Investimento",
+    "duration": "Tempo médio",
+    "quote": "Fazer orçamento"
+  },
+  "projects": {
+    "label": "Portfolio",
+    "title": "Projetos de Dados & Desenvolvimento",
+    "viewMore": "Ver projeto"
+  },
+  "curriculum": {
+    "label": "Currículo",
+    "title": "Experiência Profissional",
+    "experience": "Experiência",
+    "skills": "Habilidades Técnicas",
+    "moreSkills": "Mais tecnologias",
+    "download": "Baixar PDF"
+  },
+  "news": {
+    "label": "Artigos",
+    "title": "Notícias & Artigos em Tempo Real",
+    "subtitle": "Conteúdo atualizado via DEV.to sobre tecnologia, dados e engenharia de software",
+    "error": "Não foi possível carregar os artigos.",
+    "retry": "Tentar novamente",
+    "empty": "Nenhum artigo encontrado nesta categoria.",
+    "readMore": "Ler artigo",
+    "seeAll": "Ver todos os artigos"
+  },
+  "blog": {
+    "back": "Voltar para home",
+    "label": "Blog",
+    "title": "Artigos & Insights",
+    "subtitle": "Conteúdo sobre ETL, engenharia de dados, Python, SQL e desenvolvimento de software",
+    "search": "Buscar artigos...",
+    "searchLabel": "Buscar",
+    "categories": "Categorias",
+    "noArticles": "Nenhum artigo encontrado",
+    "previous": "Anterior",
+    "next": "Próximo"
+  },
+  "contact": {
+    "label": "Contato",
+    "title": "Iniciar um Projeto",
+    "subtitle": "Descreva seu desafio e receba uma proposta técnica sob medida.",
+    "service": "Qual serviço você precisa?",
+    "description": "Descreva o desafio",
+    "descriptionPlaceholder": "Explique o problema ou processo que precisa ser otimizado…",
+    "name": "Nome / Empresa",
+    "namePlaceholder": "Ex: João Silva",
+    "phone": "WhatsApp",
+    "phonePlaceholder": "(47) 9 0000-0000",
+    "submit": "Enviar pelo WhatsApp",
+    "submitting": "Enviando…",
+    "successTitle": "Mensagem enviada!",
+    "successMessage": "Obrigado pelo contato. Você será redirecionado para o WhatsApp em instantes.",
+    "redirecting": "Redirecionando para o WhatsApp…"
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados"
+  },
+  "errors": {
+    "nameRequired": "Preencha seu nome",
+    "phoneRequired": "Preencha seu WhatsApp",
+    "descriptionRequired": "Descreva o desafio com pelo menos 10 caracteres",
+    "network": "Falha de conexão. Verifique sua internet e tente novamente."
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "description": "O endereço acessado não existe ou foi movido.",
+    "back": "Voltar para home"
+  }
+}
